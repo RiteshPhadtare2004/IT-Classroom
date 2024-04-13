@@ -1,7 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const Bodyparser = require('body-parser')
 
+<<<<<<< HEAD
+=======
+// app.use(bodyParser.json());
+
+>>>>>>> c241ee88f92f94fba6b158a942c5098c4d05088c
 exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
