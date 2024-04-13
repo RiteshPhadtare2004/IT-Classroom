@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const Bodyparser = require('body-parser')
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 exports.signup = async (req, res) => {
   try {
