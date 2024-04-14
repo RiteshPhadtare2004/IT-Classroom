@@ -15,6 +15,12 @@
         <form (ngSubmit)="onSignup()" #f="ngForm">
           <input type="text" name="username" [(ngModel)]="formSignup.username" placeholder="Full name" required />
           <input type="text" name="email" [(ngModel)]="formSignup.email" placeholder="Email address" required />
+          <div class="radioB">
+            <input type="radio" id="teacher" name="role" [(ngModel)]="formSignup.role" value="teacher" required />
+            <label for="teacher">Teacher</label>
+            <input type="radio" id="student" name="role" [(ngModel)]="formSignup.role" value="student" required />
+            <label for="student">Student</label>
+          </div>
           <input type="password" name="password" [(ngModel)]="formSignup.password" placeholder="Password" required />
           <div class="checkbox">
             <input type="checkbox" id="signupCheck" [(ngModel)]="acceptTerms" name="acceptTerms" required />

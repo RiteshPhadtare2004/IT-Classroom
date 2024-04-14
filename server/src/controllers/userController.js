@@ -6,7 +6,7 @@ const Bodyparser = require('body-parser')
 
 exports.signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
 
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    user = new User({ username, email, password: hashedPassword });
+    user = new User({ username, email, password: hashedPassword, role });
     await user.save();
 
     res.status(201).json({ message: "User created successfully" });
@@ -34,7 +34,6 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { emailLogin, passwordLogin } = req.body;
-    console.log(`**email is  ${emailLogin}**`)
     email = emailLogin
     const user = await User.findOne({ email });
     if (!user) {

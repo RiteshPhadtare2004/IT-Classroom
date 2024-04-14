@@ -8,7 +8,7 @@ import { Router, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-login-signup',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule,HttpClientModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, HttpClientModule],
   templateUrl: './login-signup.component.html',
   styleUrls: ['./login-signup.component.css'],
 })
@@ -26,28 +26,28 @@ export class LoginSignupComponent {
   };
 
   onLogin() {
-    this.http.post('http://localhost:3000/api/login', this.formLogin)
-      .subscribe(
-        (response: any) => {
-          if (response.token) {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/home']);
-          } else {
-            console.error('Login failed:', response.message);
-            // Handle login failure
-          }
-        },
-        (error) => {
-          console.error('Login error:', error);
-          // Handle login error
+    this.http.post('http://localhost:3000/api/login', this.formLogin).subscribe(
+      (response: any) => {
+        if (response.token) {
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/home']);
+        } else {
+          console.error('Login failed:', response.message);
+          // Handle login failure
         }
-      );
+      },
+      (error) => {
+        console.error('Login error:', error);
+        // Handle login error
+      }
+    );
   }
 
   formSignup: any = {
     username: '',
     email: '',
     password: '',
+    role: '', // New field for user role
   };
 
   acceptTerms: boolean = false;
@@ -58,7 +58,8 @@ export class LoginSignupComponent {
       return;
     }
 
-    this.http.post('http://localhost:3000/api/signup', this.formSignup)
+    this.http
+      .post('http://localhost:3000/api/signup', this.formSignup)
       .subscribe(
         (response: any) => {
           if (response.message === 'User created successfully') {
