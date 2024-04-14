@@ -25,7 +25,7 @@ exports.uploadFile = async (req, res) => {
     const { filename, path } = req.file;
     const teacher = req.user;
 
-    // Check if the user is a teacher
+    
     if (teacher.role !== 'teacher') {
       return res.status(403).json({ message: 'Forbidden: Only teachers can upload files' });
     }
@@ -35,7 +35,7 @@ exports.uploadFile = async (req, res) => {
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    // Update classroom with file metadata
+    
     classroom.files.push({ filename, url: path });
     await classroom.save();
 
@@ -52,7 +52,7 @@ exports.joinClassroom = async (req, res) => {
     const classroomId = req.params.classroomId;
     const student = req.user;
 
-    // Check if the user is a student
+  
     if (student.role !== 'student') {
       return res.status(403).json({ message: 'Forbidden: Only students can join classrooms' });
     }
@@ -62,12 +62,10 @@ exports.joinClassroom = async (req, res) => {
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    // Check if student is already enrolled
     if (classroom.students.includes(student._id)) {
       return res.status(400).json({ message: 'Student is already enrolled in the classroom' });
     }
 
-    // Enroll student in the classroom
     classroom.students.push(student._id);
     await classroom.save();
 
@@ -83,7 +81,6 @@ exports.viewFiles = async (req, res) => {
     const classroomId = req.params.classroomId;
     const student = req.user;
 
-    // Check if the user is a student
     if (student.role !== 'student') {
       return res.status(403).json({ message: 'Forbidden: Only students can view files' });
     }
@@ -93,7 +90,7 @@ exports.viewFiles = async (req, res) => {
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    // Return files uploaded in the classroom
+
     res.status(200).json(classroom.files);
   } catch (error) {
     console.error(error);
