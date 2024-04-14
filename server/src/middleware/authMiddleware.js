@@ -1,28 +1,40 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/userModel');
 
-// Middleware function to verify JWT token
-const authMiddleware = (req, res, next) => {
-    // Get token from request header
+const authMiddleware = async (req, res, next) => {
+  try {
+    
     const token = req.headers.authorization;
-
-    // Check if token exists
+    
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized: Missing token' });
+      return res.status(401).json({ message: 'Unauthorized: Missing token' });
+    }
+    
+    const decodedToken = jwt.verify(token, 'your_secret_key');
+
+    const userId = decodedToken.userId;
+    // Fetch user from database based on user ID
+    const user = await User.findById(userId);
+
+    // Check if user exists
+    if (!user) {
+      return res.status(401).json({ message: 'Unauthorized: User not found' });
     }
 
-    try {
-        // Verify token
-        const decodedToken = jwt.verify(token, 'your_secret_key');
-
-        // Attach user ID to request object for further use
-        req.userId = decodedToken.userId;
-
-        // Call next middleware function
-        next();
-    } catch (error) {
-        console.error(error);
-        return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    // Check if user role is teacher or student
+    if (user.role !== 'teacher' && user.role !== 'student') {
+      return res.status(403).json({ message: 'Forbidden: Invalid user role' });
     }
+
+    // Attach user object to request for further use
+    req.user = user;
+
+    // Call next middleware function
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(401).json({ message: 'Unauthorized: Invalid token' });
+  }
 };
 
 module.exports = authMiddleware;
