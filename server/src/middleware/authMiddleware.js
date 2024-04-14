@@ -25,7 +25,6 @@ const authMiddleware = async (req, res, next) => {
     if (user.role !== 'teacher' && user.role !== 'student') {
       return res.status(403).json({ message: 'Forbidden: Invalid user role' });
     }
-
     // Attach user object to request for further use
     req.user = user;
 
@@ -36,5 +35,4 @@ const authMiddleware = async (req, res, next) => {
     res.status(401).json({ message: 'Unauthorized: Invalid token' });
   }
 };
-
 module.exports = authMiddleware;

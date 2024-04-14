@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const PORT = process.env.PORT || 3000;
+const classroomRoutes = require('./routes/classroomRoutes')
 
 const mongoose = require('mongoose');
 
@@ -17,7 +18,7 @@ app.use(cors())
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/api', userRoutes); // Mount user routes under '/api' base path
-
+app.use('/api/classroom',classroomRoutes)
 
 
 

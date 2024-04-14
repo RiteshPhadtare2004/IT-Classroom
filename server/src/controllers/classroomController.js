@@ -1,15 +1,19 @@
 const Classroom = require('../models/classroomModel');
+const User = require('../models/userModel');
 
 exports.createClassroom = async (req, res) => {
   try {
-    const { name } = req.body;
-    const teacher = req.user;
+    const { name,teacherId } = req.body;
 
-    if (teacher.role !== 'teacher') {
+    const teacherUser = await User.findOne({_id:teacherId});
+
+    console.log(teacherUser);
+
+    if (teacherUser.role !== 'teacher') {
       return res.status(403).json({ message: 'Forbidden: Only teachers can create classrooms' });
     }
 
-    const classroom = new Classroom({ name, teacher: teacher._id });
+    const classroom = new Classroom({ name, teacher: teacherUser._id });
     await classroom.save();
 
     res.status(201).json(classroom);
@@ -23,10 +27,11 @@ exports.uploadFile = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
     const { filename, path } = req.file;
-    const teacher = req.user;
+    const {teacherId} = req.body;
 
+    const teacherUser = await User.findOne({_id:teacherId});
     
-    if (teacher.role !== 'teacher') {
+    if (teacherUser.role !== 'teacher') {
       return res.status(403).json({ message: 'Forbidden: Only teachers can upload files' });
     }
 
@@ -50,23 +55,25 @@ exports.uploadFile = async (req, res) => {
 exports.joinClassroom = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
-    const student = req.user;
+    const {studentId} = req.body;
 
-  
-    if (student.role !== 'student') {
+   
+    const studentUser = await User.findOne({_id:studentId})
+    
+    if (studentUser.role !== 'student') {
       return res.status(403).json({ message: 'Forbidden: Only students can join classrooms' });
     }
 
-    const classroom = await Classroom.findById(classroomId);
+    const classroom = await Classroom.findOne({_id:classroomId});
     if (!classroom) {
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    if (classroom.students.includes(student._id)) {
+    if (classroom.students.includes(studentUser._id)) {
       return res.status(400).json({ message: 'Student is already enrolled in the classroom' });
     }
 
-    classroom.students.push(student._id);
+    classroom.students.push(studentUser._id);
     await classroom.save();
 
     res.status(200).json({ message: 'Joined classroom successfully' });
@@ -89,7 +96,7 @@ exports.viewFiles = async (req, res) => {
     if (!classroom) {
       return res.status(404).json({ message: 'Classroom not found' });
     }
-
+    
 
     res.status(200).json(classroom.files);
   } catch (error) {

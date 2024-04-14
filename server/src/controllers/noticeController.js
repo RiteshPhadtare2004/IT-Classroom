@@ -1,21 +1,24 @@
 const Notice = require('../models/noticeModel.js');
+const User = require('../models/userModel.js');
 
-exports.createNotice = async (req, res) => {
-    try{
-        const {title, description} = req.body;
+exports.createNotice = async(req,res)=>{
+	const {title, description, createdBy, user}= req.body;
+	// const userId = req.user.id;
+    const currentUser = User.findById(user)
 
-        if(!title && !description){
-            return res.status(400).json({ message: "Title and Description is required."});
-        }
-
-        const notice = new Notice({title, description, createdBy});
-        await newNotice.save();
-        res.status(201).json({ message: "Notice created Successfully", notice: newNotice});
-
-    }catch(error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
+	try{
+		if(currentUser != 'teacher'){
+			return res.status(403).json({message:"U r no the teacher"})
+		}
+		
+		const notice = new Notice({title,description,createdBy});
+		await notice.save()
+		res.status(201).json({mesage:'notice is posted'})
+	}
+	catch{
+		res.status(501).json({message:'internal sever error'})
+	
+	}
 }
 
 exports.deleteNotice = async (req, res) => {
@@ -28,6 +31,19 @@ exports.deleteNotice = async (req, res) => {
 
         res.status(201).json({message: "Notice deleted successfully"});
     }catch(error){
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+
+exports.viewNotice= async (req,res)=>{
+    try{
+        const notices = Notice.find().
+
+        res.status(201).json(notices);
+    }
+    catch(error){
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }

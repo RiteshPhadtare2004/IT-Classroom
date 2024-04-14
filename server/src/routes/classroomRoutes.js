@@ -3,13 +3,12 @@ const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const classroomController = require('../controllers/classroomController');
 
+router.post('/create', classroomController.createClassroom);
 
-
-router.post('/create', authMiddleware, classroomController.createClassroom);
 router.post('/upload/:classroomId', authMiddleware, classroomController.uploadFile);
 
+router.post('/join/:classroomId',  classroomController.joinClassroom);
 
-router.post('/join/:classroomId', authMiddleware, classroomController.joinClassroom);
 router.get('/files/:classroomId', authMiddleware, classroomController.viewFiles);
 
 module.exports = router;
