@@ -5,23 +5,6 @@
   font-family:  "Poppins", sans-serif;
 }
 
-/* .navbar{
-  background-color: #a1bafd;
-  height: 10vh;
-}
-
-.project-name{
-  font-size: 30px;
-}
-
-.nav-link{
-  font-size: 20px;
-}
-
-.collapse{
-  display: flex; justify-content: space-around;
-} */
-
 .nav-bar{
   display: flex;
   align-items: center;
@@ -48,4 +31,9 @@
   list-style-type: none;
   display: flex;
   gap: 50px;
+}
+.links ul li a{
+  text-decoration: none;
+  color: black;
+  
 }
