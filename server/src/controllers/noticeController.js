@@ -23,13 +23,16 @@ exports.createNotice = async(req,res)=>{
 
 exports.deleteNotice = async (req, res) => {
     try{
-        const noticeId = req.param.id;
+        const noticeId = req.body.noticeId;
+        console.log(noticeId)
 
         if(!noticeId){
             return res.status(404).json({message: "Notice not found"});
         }
+        
+        await Notice.findByIdAndDelete(noticeId);
+        res.status(200).json({message: "Notice deleted successfully"});
 
-        res.status(201).json({message: "Notice deleted successfully"});
     }catch(error){
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
