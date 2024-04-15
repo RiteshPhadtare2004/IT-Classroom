@@ -18,7 +18,8 @@ app.use(cors())
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/api', userRoutes); // Mount user routes under '/api' base path
-app.use('/api/classroom',classroomRoutes)
+app.use('/api/classroom',classroomRoutes);
+app.use('/api/notices',noticeRoutes);
 
 
 
