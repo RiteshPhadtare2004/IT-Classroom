@@ -1,8 +1,9 @@
 const mongoose = reguire ('mongoose')
 
 const profileSchema= new mongoose.Schema({
-    teacher: {type: String, required: true },
-    student: {type: String, required: true}
+    email: { type: String, required: true, unique: true },
+    name: {type: String, required: true, unique: true },
+    role: { type: String, enum: ['teacher', 'student'], required: true }
   });
   
 
