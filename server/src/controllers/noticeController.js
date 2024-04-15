@@ -4,10 +4,10 @@ const User = require('../models/userModel.js');
 exports.createNotice = async(req,res)=>{
 	const {title, description, createdBy, user}= req.body;
 	// const userId = req.user.id;
-    const currentUser = User.findById(user)
-
+    const currentUser =await User.findById(user)
+   
 	try{
-		if(currentUser != 'teacher'){
+		if(currentUser.role != "teacher"){
 			return res.status(403).json({message:"U r not the teacher"})
 		}
 		
