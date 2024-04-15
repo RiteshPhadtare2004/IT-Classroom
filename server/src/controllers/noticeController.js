@@ -8,7 +8,7 @@ exports.createNotice = async(req,res)=>{
 
 	try{
 		if(currentUser != 'teacher'){
-			return res.status(403).json({message:"U r no the teacher"})
+			return res.status(403).json({message:"U r not the teacher"})
 		}
 		
 		const notice = new Notice({title,description,createdBy});
