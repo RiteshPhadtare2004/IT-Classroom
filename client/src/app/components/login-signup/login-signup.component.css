@@ -43,7 +43,7 @@ body {
   color: black;
 }
 .wrapper.active .form.login {
-  bottom: -15%;
+  bottom: -12%;
   border-radius: 35%;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -110,7 +110,7 @@ form input[type="radio"] {
 form input[type="radio"] + label {
   display: inline-block;
   margin-right: 7px;
-  padding: 20px 65px;
+  padding: 15px 65px;
   font-size: 16px;
   border: 2px solid #fff;
   border-radius: 5px;
@@ -123,10 +123,22 @@ form input[type="radio"]:checked + label {
   color: #4070f4;
 }
 
-/* Additional styling */
-form .radioB {
-  margin-bottom: 10px;
+.radioL input[type="radio"] + label {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 15px 65px;
+  font-size: 16px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  color: #000000;
+  cursor: pointer;
 }
+
+.radioL input[type="radio"]:checked + label {
+  background: #000000;
+  color: #ffffff;
+}
+
 
 form a {
   color: #333;
@@ -136,7 +148,7 @@ form a:hover {
   text-decoration: underline;
 }
 form input[type="submit"] {
-  margin-top: 15px;
+  margin-top: 8px;
   padding: none;
   font-size: 18px;
   font-weight: 500;
