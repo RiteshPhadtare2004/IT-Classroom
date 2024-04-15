@@ -52,12 +52,6 @@ exports.login = async (req, res) => {
       return res.status(500).json({ message: "Failed to generate token" });
     }
 
-<<<<<<< HEAD
-    res.status(201).json({ token,user });
-=======
-    res.status(200).json({ token,user });
-    
->>>>>>> c48a77d2209317c0c6d10f19cc8d6df8618890ee
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: `Internal server error ${error}` });
