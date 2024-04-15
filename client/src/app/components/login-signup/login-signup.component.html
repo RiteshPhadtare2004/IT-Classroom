@@ -36,12 +36,6 @@
         <form class="loginF" (ngSubmit)="onLogin()" #f="ngForm">
           <input type="text" name="emailLogin" [(ngModel)]="formLogin.emailLogin" placeholder="Email address" required />
           <input type="password" name="passwordLogin" [(ngModel)]="formLogin.passwordLogin" placeholder="Password" required />
-          <div class="radioL">
-            <input type="radio" id="teacherL" name="roleL" [(ngModel)]="formLogin.roleL" value="teacher" required />
-            <label for="teacher">Teacher</label>
-            <input type="radio" id="studentL" name="roleL" [(ngModel)]="formLogin.roleL" value="student" required />
-            <label for="student">Student</label>
-          </div>
           <a href="#">Forgot password?</a>
           <input type="submit" value="Login" />
         </form>
