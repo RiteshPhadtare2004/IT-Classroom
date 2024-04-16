@@ -13,6 +13,8 @@ router.post('/join/:classroomId',  classroomController.joinClassroom);
 
 router.get('/files/:classroomId', authMiddleware, classroomController.viewFiles);
 
+router.get('/displayClassroom',classroomController.displayClassroom);
+
 router.get('/home', classroomController.displayClassroom);
 
 module.exports = router;
