@@ -5,6 +5,8 @@ const classroomController = require('../controllers/classroomController');
 
 router.post('/create', classroomController.createClassroom);
 
+router.delete('/delete',classroomController.deleteClassroom)
+
 router.post('/upload/:classroomId', authMiddleware, classroomController.uploadFile);
 
 router.post('/join/:classroomId',  classroomController.joinClassroom);

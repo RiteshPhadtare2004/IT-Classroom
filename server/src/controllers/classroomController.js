@@ -35,19 +35,15 @@ exports.uploadFile = async (req, res) => {
     const classroomId = req.params.classroomId;
     const { filename, path } = req.file;
     const {teacherId} = req.body;
-
     const teacherUser = await User.findOne({_id:teacherId});
     
     if (teacherUser.role !== 'teacher') {
       return res.status(403).json({ message: 'Forbidden: Only teachers can upload files' });
     }
-
     const classroom = await Classroom.findById(classroomId);
     if (!classroom) {
       return res.status(404).json({ message: 'Classroom not found' });
-    }
-
-    
+    }  
     classroom.files.push({ filename, url: path });
     await classroom.save();
 
@@ -116,7 +112,6 @@ exports.displayClassroom= async (res,req)=>{
   try{
       const {studentId} = req.body;
       // const studentUser = await User.findOne({_id:studentId});
-
       const classrooms = await Classroom.find({ students: studentId });
       res.status(200).json(classrooms);
   }
@@ -124,6 +119,24 @@ exports.displayClassroom= async (res,req)=>{
   catch(error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+exports.deleteClassroom = async(req,res)=>{
+  try{
+    const {classroomId} = req.body;
+    console.log(classroomId)
+
+        if(!classroomId){
+            return res.status(404).json({message: "classroom not found"});
+        }
         
+        await Classroom.findByIdAndDelete(classroomId);
+        res.status(200).json({message: "Classroom deleted successfully"});
+
+  }
+  catch(error){
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 }
