@@ -1,20 +1,21 @@
 const User = require('../models/userModel');
 
-exports.profile = async(res, req)=>{
-    try{
-        const {studentId} = req.body;
+exports.profile = async (req, res) => {
+    try {
+        console.log("abc");
+        const { studentId } = req.body;
 
-        const itUser = await User.findOne({_id: studentId});
+        const itUser = await User.findOne({ _id: studentId });
 
-        if(!itUser){
-            return res.status(404).json({message: 'user not found'});
+        if (!itUser) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        const {email, name, role} =itUser;
+        const { email, username, role } = itUser;
 
-        res.status(200).json({email, name, role});
-    }catch(error){
+        res.status(200).json({ email, username, role });
+    } catch (error) {
         console.error(error);
-        res.status(500).json({message: 'Internal server error '})
+        res.status(500).json({ message: 'Internal server error' });
     }
 }

@@ -112,7 +112,7 @@ exports.viewFiles = async (req, res) => {
   }
 };
 
-exports.displayClassroom= async (req,res)=>{
+exports.displayClassroom= async (res,req)=>{
   try{
       const {studentId} = req.body;
       // const studentUser = await User.findOne({_id:studentId});

@@ -4,6 +4,7 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000;
 const classroomRoutes = require('./routes/classroomRoutes')
 const noticeRoutes = require('./routes/noticeRoutes')
+const profileRoutes = require('./routes/profileRoutes')
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/IT-Classroom', {
