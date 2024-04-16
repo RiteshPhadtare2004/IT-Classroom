@@ -25,13 +25,38 @@ export class LoginSignupComponent {
     passwordLogin: ''
   };
 
+  userData: any = {
+    user_id : '',
+    username : '',
+    email : '',
+    role : '',
+  }
+
   onLogin() {
     this.http.post('http://localhost:3000/api/login', this.formLogin).subscribe(
       (response: any) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
           console.log(`Role is ${response.user.role}`);
-          this.router.navigate(['/home']);
+          
+          this.userData = {
+            user_id: response.user._id,
+            username: response.user.username,
+            email: response.user.email,
+            role: response.user.role,
+          }
+          
+          localStorage.setItem('userData', this.userData);
+
+          if(response.user.role == 'student'){
+            this.router.navigate(['/home']);
+            
+          }else{
+            this.router.navigate(['/teacher']);
+
+          }
+
+
         } else {
           console.error('Login failed:', response.message);
           // Handle login failure

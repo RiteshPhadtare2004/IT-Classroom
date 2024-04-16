@@ -1,0 +1,39 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family:  "Poppins", sans-serif;
+  }
+  
+  .nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 10vh;
+    background-color: #F7EEDD;
+  }
+  .project-name{
+    width: 20%;
+  }
+  .project-name a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .links{
+    width: 40%;
+  }
+  
+  .links ul{
+    font-size: 20px;
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+  }
+  .links ul li a{
+    text-decoration: none;
+    color: black;
+    
+  }
