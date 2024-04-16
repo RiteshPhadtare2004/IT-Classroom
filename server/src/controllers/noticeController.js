@@ -7,9 +7,9 @@ exports.createNotice = async(req,res)=>{
     const currentUser =await User.findById(user)
    
 	try{
-		if(currentUser.role != "teacher"){
-			return res.status(403).json({message:"U r not the teacher"})
-		}
+		// if(currentUser.role != "teacher"){
+		// 	return res.status(403).json({message:"U r not the teacher"})
+		// }
 		
 		const notice = new Notice({title,description,createdBy});
 		await notice.save()

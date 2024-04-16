@@ -13,7 +13,7 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrls: ['./login-signup.component.css'],
 })
 export class LoginSignupComponent {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
   isLogin: boolean = true;
 
   toggleForm() {
@@ -26,10 +26,10 @@ export class LoginSignupComponent {
   };
 
   userData: any = {
-    user_id : '',
-    username : '',
-    email : '',
-    role : '',
+    user_id: '',
+    username: '',
+    email: '',
+    role: '',
   }
 
   onLogin() {
@@ -38,20 +38,25 @@ export class LoginSignupComponent {
         if (response.token) {
           localStorage.setItem('token', response.token);
           console.log(`Role is ${response.user.role}`);
-          
+
           this.userData = {
             user_id: response.user._id,
             username: response.user.username,
             email: response.user.email,
             role: response.user.role,
           }
-          
-          localStorage.setItem('userData', this.userData);
 
-          if(response.user.role == 'student'){
+          // Convert the object to a JSON string
+          const userDataString = JSON.stringify(this.userData);
+
+          // Store the JSON string in local storage
+          localStorage.setItem('userData', userDataString);
+          console.log(userDataString)
+
+          if (response.user.role == 'student') {
             this.router.navigate(['/home']);
-            
-          }else{
+
+          } else {
             this.router.navigate(['/teacher']);
 
           }
