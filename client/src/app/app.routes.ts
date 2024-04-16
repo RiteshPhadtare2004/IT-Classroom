@@ -6,6 +6,7 @@ import { NoticesComponent } from './components/notices/notices.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { TeacherLayoutComponent } from './components/teacher-layout/teacher-layout.component';
 import { TeacherCCComponent } from './components/teacher-cc/teacher-cc.component';
+import { CreateClassroomComponent } from './components/create-classroom/create-classroom.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'teacherClassroom', pathMatch: 'full' },
       { path: 'teacherClassroom', component: TeacherCCComponent },
+      { path: 'createClassroom', component: CreateClassroomComponent },
     ]
   },
 ];

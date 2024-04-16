@@ -1,0 +1,15 @@
+
+<div class="createClass">
+    <form id="createClass-form" (ngSubmit)="createClass()">
+      <div class="form-group">
+        <div>
+          <label for="name">Title:</label>
+          <input type="text" name="name"  [(ngModel)]="classData.name"  required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+</div>
+  
