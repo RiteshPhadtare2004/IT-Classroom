@@ -16,8 +16,7 @@ exports.createNotice = async(req,res)=>{
 		res.status(201).json({mesage:'notice is posted'})
 	}
 	catch{
-		res.status(501).json({message:'internal sever error'})
-	
+		res.status(501).json({message:'internal sever error'})	
 	}
 }
 
@@ -38,7 +37,6 @@ exports.deleteNotice = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
 
 exports.viewNotice= async (req,res)=>{
     try{
