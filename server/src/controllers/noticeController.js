@@ -40,8 +40,9 @@ exports.deleteNotice = async (req, res) => {
 
 exports.viewNotice= async (req,res)=>{
     try{
-        const notices = Notice.find().
-
+        
+        const notices =await Notice.find()
+        
         res.status(201).json(notices);
     }
     catch(error){
