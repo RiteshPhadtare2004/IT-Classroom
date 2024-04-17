@@ -61,9 +61,9 @@ exports.createClassroom = async (req, res) => {
 // };
 exports.uploadFile = async (req, res) => {
   try {
-    const classroomId = req.params.classroomId;
+    const {classroomId} = req.params;
     const { filename, path: filePath } = req.file;
-    const { title, description, teacherId } = req.body;
+    const { title, description } = req.body;
 
     // Find the classroom
     const classroom = await Classroom.findById(classroomId);
@@ -79,7 +79,7 @@ exports.uploadFile = async (req, res) => {
     res.status(200).json({ message: 'File uploaded successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error'+error });
   }
 };
 
