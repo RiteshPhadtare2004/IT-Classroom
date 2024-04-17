@@ -1,12 +1,15 @@
 <div class="nav-bar">
   <div class="project-name">
-    <a routerLink="/home">IT Classroom</a> 
+    <a [routerLink]="routes.home">IT Classroom</a>
   </div>
   <div class="links">
     <ul>
-      <li><a href="/home">Classroom</a></li>
-      <li><a href="/home/profile">Profile</a></li>
-      <li><a href="/home/notices">Notices</a></li>
+      <li><a [routerLink]="routes.home">Classroom</a></li>
+      <li><a [routerLink]="routes.profile">Profile</a></li>
+      <li><a [routerLink]="routes.notices">Notices</a></li>
+      <div *ngIf="type === 'teacher'">
+        <li><a [routerLink]="routes.createClassroom">Create Classroom</a></li>
+      </div>
       <li>Logout</li>
     </ul>
   </div>
