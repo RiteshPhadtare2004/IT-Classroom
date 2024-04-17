@@ -1,6 +1,7 @@
 const Classroom = require('../models/classroomModel');
 const User = require('../models/userModel');
-
+const fs = require('fs');
+const path = require('path');
 
 const generateRandomCode = () => {
   return Math.floor(10000 + Math.random() * 90000); 
@@ -33,18 +34,23 @@ exports.createClassroom = async (req, res) => {
 exports.uploadFile = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
-    const { filename, path } = req.file;
-    const {teacherId} = req.body;
-    const teacherUser = await User.findOne({_id:teacherId});
-    
-    if (teacherUser.role !== 'teacher') {
-      return res.status(403).json({ message: 'Forbidden: Only teachers can upload files' });
-    }
+    const { filename, path: filePath } = req.file;
+    const { title, description, teacherId } = req.body;
+
+    // Find the classroom
     const classroom = await Classroom.findById(classroomId);
     if (!classroom) {
+      fs.unlinkSync(filePath); // Delete the uploaded file
       return res.status(404).json({ message: 'Classroom not found' });
-    }  
-    classroom.files.push({ filename, url: path });
+    }
+
+    // Move the file to the desired location
+    const uploadDir = path.join(__dirname, '../uploads'); // Assuming uploads folder exists
+    const newFilePath = path.join(uploadDir, filename);
+    fs.renameSync(filePath, newFilePath);
+
+    // Add file details to the classroom
+    classroom.files.push({ filename, title, description, url: newFilePath });
     await classroom.save();
 
     res.status(200).json({ message: 'File uploaded successfully' });

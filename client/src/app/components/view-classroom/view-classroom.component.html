@@ -1,0 +1,33 @@
+<div class="upload-form">
+    <h2>Upload File in Classroom</h2>
+    <form action="/api/classroom/upload/{{classroomId}}" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Select File:</label>
+        <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.txt" required>
+      </div>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn">Upload</button>
+    </form>
+  </div>
+  
+
+  <div class="classroom">
+    <h1>Classroom Name</h1>
+    <div class="files">
+      <div class="file">
+        <h2 class="file-title">File Title 1</h2>
+        <p class="file-description">File Description 1</p>
+      </div>
+      <div class="file">
+        <h2 class="file-title">File Title 2</h2>
+        <p class="file-description">File Description 2</p>
+      </div>
+    </div>
+  </div>
