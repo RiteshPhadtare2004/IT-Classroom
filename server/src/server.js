@@ -16,7 +16,6 @@ mongoose.connect('mongodb://localhost:27017/IT-Classroom', {
 
 app.use(express.json()); // Parse incoming JSON data
 app.use(cors());
-
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
