@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     id:any=''
     joinClassroomData:any={
       studentId : '',
-      classroomId: ''
+      classCode: ''
     }
     constructor(private router: Router, private http: HttpClient) { }
 

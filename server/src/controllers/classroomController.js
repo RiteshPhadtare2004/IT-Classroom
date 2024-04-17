@@ -64,7 +64,7 @@ exports.uploadFile = async (req, res) => {
 
 exports.joinClassroom = async (req, res) => {
   try {
-    const {classroomId,studentId} = req.body;
+    const {studentId,classCode} = req.body;
    
     const studentUser = await User.findOne({_id:studentId})
     
@@ -72,8 +72,7 @@ exports.joinClassroom = async (req, res) => {
       return res.status(403).json({ message: 'Forbidden: Only students can join classrooms' });
     }
 
-   
-    const classroom = await Classroom.findOne({_id:classroomId});
+    const classroom = await Classroom.findOne({code:classCode});
     if (!classroom) {
       return res.status(404).json({ message: 'Classroom not found' });
     }
@@ -82,8 +81,11 @@ exports.joinClassroom = async (req, res) => {
       return res.status(400).json({ message: 'Student is already enrolled in the classroom' });
     }
 
-    classroom.students.push(studentUser._id);
-    await classroom.save();
+    
+      classroom.students.push(studentUser._id);
+      await classroom.save();
+   
+    
 
     res.status(200).json({ message: 'Joined classroom successfully' });
   } catch (error) {
