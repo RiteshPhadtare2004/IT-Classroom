@@ -27,7 +27,7 @@ export const routes: Routes = [
       { path: 'classroom', component: ClassroomsComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'notices', component: NoticesComponent },
-      { path: 'viewnotes', component: ViewClassroomComponent}
+      { path: 'viewclassroom/:id', component: ViewClassroomComponent}
     ]
   },{
     path: 'teacher',

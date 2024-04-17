@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-classroom',
@@ -9,5 +10,16 @@ import { Component } from '@angular/core';
 })
 
 export class ViewClassroomComponent {
-  classroomId: string = "YOUR_CLASSROOM_ID";
+  classroomId: any='';
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    // Retrieve the classroomId from the route parameters
+    this.route.paramMap.subscribe(params => {
+      this.classroomId = params.get('id');
+      console.log('Classroom ID:', this.classroomId);
+      // Now you can use this.classroomId in your component logic
+    });
+  }
 }

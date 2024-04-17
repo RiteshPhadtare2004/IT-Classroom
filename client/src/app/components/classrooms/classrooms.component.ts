@@ -15,9 +15,8 @@ export class ClassroomsComponent implements OnInit {
     
   classrooms: any='';
   studentId: any='';
-  router: any;
 
-  constructor(private http: HttpClient,router: Router) { }
+  constructor(private http: HttpClient,private router: Router,) { }
 
   ngOnInit() {
     const userDataString = localStorage.getItem('userData');
@@ -49,8 +48,8 @@ export class ClassroomsComponent implements OnInit {
       );
   }
 
-  send_classroom(classroomId){
-
-    this.router.navigate(['/viewnotes'])
+  send_classroom(classroomId: any) {
+    this.router.navigate(['/home/viewclassroom', classroomId]);
   }
+  
 }

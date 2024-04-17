@@ -31,6 +31,34 @@ exports.createClassroom = async (req, res) => {
   }
 };
 
+// exports.uploadFile = async (req, res) => {
+//   try {
+//     const classroomId = req.params.classroomId;
+//     const { filename, path: filePath } = req.file;
+//     const { title, description, teacherId } = req.body;
+
+//     // Find the classroom
+//     const classroom = await Classroom.findById(classroomId);
+//     if (!classroom) {
+//       fs.unlinkSync(filePath); // Delete the uploaded file
+//       return res.status(404).json({ message: 'Classroom not found' });
+//     }
+
+//     // Move the file to the desired location
+//     const uploadDir = path.join(__dirname, '../uploads'); // Assuming uploads folder exists
+//     const newFilePath = path.join(uploadDir, filename);
+//     fs.renameSync(filePath, newFilePath);
+
+//     // Add file details to the classroom
+//     classroom.files.push({ filename, title, description, url: newFilePath });
+//     await classroom.save();
+
+//     res.status(200).json({ message: 'File uploaded successfully' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// };
 exports.uploadFile = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
@@ -44,13 +72,8 @@ exports.uploadFile = async (req, res) => {
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    // Move the file to the desired location
-    const uploadDir = path.join(__dirname, '../uploads'); // Assuming uploads folder exists
-    const newFilePath = path.join(uploadDir, filename);
-    fs.renameSync(filePath, newFilePath);
-
     // Add file details to the classroom
-    classroom.files.push({ filename, title, description, url: newFilePath });
+    classroom.files.push({ filename, title, description, url: filePath });
     await classroom.save();
 
     res.status(200).json({ message: 'File uploaded successfully' });
