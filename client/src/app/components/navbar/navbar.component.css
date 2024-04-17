@@ -23,17 +23,48 @@
   font-size: 30px;
 }
 .links{
-  width: 40%;
+  width: 60%;
+  align-items: center;
 }
 
 .links ul{
   font-size: 20px;
   list-style-type: none;
   display: flex;
+  align-items: center;
   gap: 50px;
 }
 .links ul li a{
   text-decoration: none;
   color: black;
   
+}
+
+.form-container {
+  width: 100%;
+}
+
+.form-container input[type="text"],
+.form-container input[type="submit"] {
+  padding: 10px;
+  margin-right: 10px; /* Adjust margin as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-container input[type="submit"] {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+.form-container input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff; /* Blue or your preferred focus color */
 }
