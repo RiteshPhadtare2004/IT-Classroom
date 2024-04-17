@@ -40,7 +40,6 @@ export class ClassroomsComponent implements OnInit {
       .subscribe(
         (classrooms) => {
           this.classrooms = classrooms;
-          console.log(this.classrooms[0].name)
         },
         (error) => {
           console.error('Error fetching classrooms:', error);

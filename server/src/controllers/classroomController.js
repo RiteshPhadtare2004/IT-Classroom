@@ -61,11 +61,10 @@ exports.uploadFile = async (req, res) => {
 };
 
 
+
 exports.joinClassroom = async (req, res) => {
   try {
-    const classroomId = req.params.classroomId;
-    const {studentId} = req.body;
-
+    const {classroomId,studentId} = req.body;
    
     const studentUser = await User.findOne({_id:studentId})
     

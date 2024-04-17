@@ -9,7 +9,7 @@ router.delete('/delete',classroomController.deleteClassroom)
 
 router.post('/upload/:classroomId', authMiddleware, classroomController.uploadFile);
 
-router.post('/join/:classroomId',  classroomController.joinClassroom);
+router.post('/join',  classroomController.joinClassroom);
 
 router.get('/files/:classroomId', authMiddleware, classroomController.viewFiles);
 

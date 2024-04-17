@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +14,13 @@ import { RouterLink } from '@angular/router';
 export class NavbarComponent implements OnInit {
     routes:any='';
     type:string=''
+    id:any=''
+    joinClassroomData:any={
+      studentId : '',
+      classroomId: ''
+    }
+    constructor(private router: Router, private http: HttpClient) { }
+
     studentRoutes : any = {
       'home':'/home',
       'profile':'/home/profile',
@@ -38,9 +45,22 @@ export class NavbarComponent implements OnInit {
             this.type = 'teacher'
             this.routes = this.teacherRoutes
           }
+          this.id = userData.user_id
+          console.log(this.id)
         } else {
           console.log('No userData found in local storage');
         }
-
+    }
+    
+    joinClassroom(){
+      this.joinClassroomData.studentId = this.id;
+      this.http.post('http://localhost:3000/api/classroom/join',this.joinClassroomData).subscribe(
+        (response: any) => {
+          window.location.reload();
+        },
+        (error: any) => {
+          console.error('Join Classroom error:', error);
+        }
+      );
     }
 }
