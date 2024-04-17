@@ -117,6 +117,8 @@ exports.joinClassroom = async (req, res) => {
   }
 };
 
+const baseUrl = 'http://localhost:3000'; // Your server's base URL
+
 exports.viewFiles = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
@@ -126,12 +128,19 @@ exports.viewFiles = async (req, res) => {
       return res.status(404).json({ message: 'Classroom not found' });
     }
     
-    res.status(200).json(classroom.files);
+    // Construct file URLs
+    const filesWithUrls = classroom.files.map(file => ({
+      ...file.toObject(),
+      url: `${baseUrl}/uploads/${file.filename}` // Construct URL for accessing the file
+    }));
+
+    res.status(200).json(filesWithUrls);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 exports.displayClassroom= async (req,res)=>{
   try{
