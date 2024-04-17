@@ -108,9 +108,10 @@ exports.viewFiles = async (req, res) => {
   }
 };
 
-exports.displayClassroom= async (res,req)=>{
+exports.displayClassroom= async (req,res)=>{
   try{
-      const {studentId} = req.body;
+      const {studentId} = req.params;
+      
       // const studentUser = await User.findOne({_id:studentId});
       const classrooms = await Classroom.find({ students: studentId });
       res.status(200).json(classrooms);
