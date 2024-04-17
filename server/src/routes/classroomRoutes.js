@@ -27,7 +27,7 @@ router.post('/upload/:classroomId',upload.single('file'), classroomController.up
 
 router.post('/join',  classroomController.joinClassroom);
 
-router.get('/files/:classroomId', authMiddleware, classroomController.viewFiles);
+router.get('/files/:classroomId', classroomController.viewFiles);
 
 router.get('/displayClassroom/:studentId',classroomController.displayClassroom);
 
