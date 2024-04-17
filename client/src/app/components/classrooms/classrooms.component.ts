@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classrooms',
@@ -14,8 +15,9 @@ export class ClassroomsComponent implements OnInit {
     
   classrooms: any='';
   studentId: any='';
+  router: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,router: Router) { }
 
   ngOnInit() {
     const userDataString = localStorage.getItem('userData');
@@ -45,5 +47,10 @@ export class ClassroomsComponent implements OnInit {
           console.error('Error fetching classrooms:', error);
         }
       );
+  }
+
+  send_classroom(classroomId){
+
+    this.router.navigate(['/viewnotes'])
   }
 }

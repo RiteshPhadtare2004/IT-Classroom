@@ -97,13 +97,8 @@ exports.joinClassroom = async (req, res) => {
 exports.viewFiles = async (req, res) => {
   try {
     const classroomId = req.params.classroomId;
-    const student = req.user;
-
-    if (student.role !== 'student') {
-      return res.status(403).json({ message: 'Forbidden: Only students can view files' });
-    }
-
     const classroom = await Classroom.findById(classroomId);
+    
     if (!classroom) {
       return res.status(404).json({ message: 'Classroom not found' });
     }

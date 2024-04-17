@@ -7,6 +7,7 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
 import { TeacherLayoutComponent } from './components/teacher-layout/teacher-layout.component';
 import { TeacherCCComponent } from './components/teacher-cc/teacher-cc.component';
 import { CreateClassroomComponent } from './components/create-classroom/create-classroom.component';
+import { ViewClassroomComponent } from './components/view-classroom/view-classroom.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'classroom', component: ClassroomsComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'notices', component: NoticesComponent },
+      { path: 'viewnotes', component: ViewClassroomComponent}
     ]
   },{
     path: 'teacher',
