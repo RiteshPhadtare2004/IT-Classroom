@@ -21,22 +21,21 @@ exports.createNotice = async(req,res)=>{
 }
 
 exports.deleteNotice = async (req, res) => {
-    try{
-        const noticeId = req.body.noticeId;
-        console.log(noticeId)
-
-        if(!noticeId){
-            return res.status(404).json({message: "Notice not found"});
+    try {
+        // Check if noticeId is present in the request
+        const noticeId = req.params.noticeId;
+        if (!noticeId) {
+            return res.status(400).json({ message: 'Notice ID is required' });
         }
         
+        // Delete notice from the database
         await Notice.findByIdAndDelete(noticeId);
-        res.status(200).json({message: "Notice deleted successfully"});
-
-    }catch(error){
+        res.status(200).json({ message: 'Notice deleted successfully' });
+    } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
-}
+};
 
 exports.viewNotice= async (req,res)=>{
     try{

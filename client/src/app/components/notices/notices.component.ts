@@ -32,5 +32,17 @@ export class NoticesComponent {
         }
       );
   }
+
+  deleteNotice(noticeId: string) {
+    this.http.delete<any[]>('http://localhost:3000/api/notices/deleteNotice/' + noticeId)
+      .subscribe(
+        () => {
+          this.fetchNotices(); // Refresh notices after deletion
+        },
+        (error) => {
+          console.error('Error deleting notice:', error);
+        }
+      );
+}
 }
 
