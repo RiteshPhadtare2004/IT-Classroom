@@ -24,7 +24,6 @@ export class ClassroomsComponent implements OnInit {
       // Parse the JSON string back to an object
       const userData = JSON.parse(userDataString);
       this.studentId = userData.user_id;
-      console.log(this.studentId);
       this.fetchClassrooms(); // Call fetchClassrooms here
     } else {
       console.log('No userData found in local storage');

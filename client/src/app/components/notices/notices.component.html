@@ -1,6 +1,8 @@
 <div class="body">
+    <div *ngIf="type === 'teacher'">
     <app-add-notice-button></app-add-notice-button>
     <app-add-notice-page></app-add-notice-page>
+    </div>
     <div *ngFor="let notice of notices" class="notice">
         <div class="notice-content">
             <h3 class="notice-title">{{ notice.title }}</h3>
@@ -9,7 +11,9 @@
         </div>
         <div>
             <button class="btn btn_get btn_get_two" type="submit">view</button>
+            <div *ngIf="type === 'teacher'">
             <button class="btn btn_get btn_get_two" (click)="deleteNotice(notice._id)">Delete</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

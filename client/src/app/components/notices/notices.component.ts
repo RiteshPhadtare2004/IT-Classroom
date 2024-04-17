@@ -13,11 +13,25 @@ import { CommonModule } from '@angular/common';
 })
 export class NoticesComponent {
   notices: any='';
+  type:string= '';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.fetchNotices();
+    const userDataString = localStorage.getItem('userData');
+        if (userDataString !== null) {
+          // Parse the JSON string back to an object
+          const userData = JSON.parse(userDataString);
+          if(userData.role == 'student'){
+            this.type = 'student'
+          }else{
+            this.type = 'teacher'
+          }
+          this.fetchNotices();
+        } else {
+          console.log('No userData found in local storage');
+        }
+    
   }
 
   fetchNotices() {
