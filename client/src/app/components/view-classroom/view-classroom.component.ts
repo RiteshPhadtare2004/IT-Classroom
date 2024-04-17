@@ -79,6 +79,7 @@ export class ViewClassroomComponent implements OnInit{
         .subscribe(
           (response: any) => {
             console.log('File uploaded successfully:', response);
+            window.location.reload();
           },
           (error) => {
             console.error('Upload error:', error);
