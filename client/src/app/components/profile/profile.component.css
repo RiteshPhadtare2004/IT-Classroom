@@ -1,0 +1,66 @@
+#nav1 {
+    font-weight: bold;
+}
+#button1{
+   margin-top: 20px;
+   margin-left: 45%;
+}
+
+.student-profile .card {
+    border-radius: 10px;
+}
+.student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+.student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+.student-profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+.student-profile .table th,
+.student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+}
+body {
+    background: linear-gradient(to top, #48c6ef 0%, #6643c6 100%);
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+.profile {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.profile_img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+    
+}
+
+.profile h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.profile p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+#content1{
+    font-weight: bold;
+    font-size: 40px;
+}
