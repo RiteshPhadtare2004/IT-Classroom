@@ -162,7 +162,7 @@ exports.getTeacherClassrooms = async (req, res) => {
     const {teacherId} = req.params;
 
         const classrooms = await Classroom.find({ teacher: teacherId });
-        console.log(classrooms);
+        // console.log(classrooms);
 
     res.status(200).json(classrooms);
   } catch (error) {
@@ -174,14 +174,14 @@ exports.getTeacherClassrooms = async (req, res) => {
 exports.deleteClassroom = async(req,res)=>{
   try{
     const {classroomId} = req.body;
-    console.log(classroomId)
+    console.log('classroom id: '+classroomId)
 
-        if(!classroomId){
-            return res.status(404).json({message: "classroom not found"});
-        }
-        
-        await Classroom.findByIdAndDelete(classroomId);
-        res.status(200).json({message: "Classroom deleted successfully"});
+    if(!classroomId){
+        return res.status(404).json({message: "classroom not found"});
+    }
+    
+    await Classroom.findByIdAndDelete(classroomId);
+    res.status(200).json({message: "Classroom deleted successfully"});
 
   }
   catch(error){

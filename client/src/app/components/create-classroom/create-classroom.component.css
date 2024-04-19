@@ -1,6 +1,3 @@
-body {
-    margin: 20px;
-}
 
 .createClass {
     background-color: #f9f9f9;
@@ -11,7 +8,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: left;
+    margin: 30px;
 }
+
 
 label {
     font-weight: bold;
