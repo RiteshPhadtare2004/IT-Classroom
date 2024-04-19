@@ -157,6 +157,20 @@ exports.displayClassroom= async (req,res)=>{
   }
 }
 
+exports.getTeacherClassrooms = async (req, res) => {
+  try {
+    const {teacherId} = req.params;
+
+        const classrooms = await Classroom.find({ teacher: teacherId });
+        console.log(classrooms);
+
+    res.status(200).json(classrooms);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 exports.deleteClassroom = async(req,res)=>{
   try{
     const {classroomId} = req.body;

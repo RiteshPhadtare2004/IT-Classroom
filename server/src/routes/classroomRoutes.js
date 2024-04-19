@@ -31,6 +31,8 @@ router.get('/files/:classroomId', classroomController.viewFiles);
 
 router.get('/displayClassroom/:studentId',classroomController.displayClassroom);
 
+router.get('/displayTeacherClassroom/:teacherId',classroomController.getTeacherClassrooms);
+
 router.get('/home', classroomController.displayClassroom);
 
 module.exports = router;
