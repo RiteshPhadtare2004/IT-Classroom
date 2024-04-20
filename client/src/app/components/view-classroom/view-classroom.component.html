@@ -1,4 +1,4 @@
-<!-- <div *ngIf="type === 'teacher'"> -->
+<div *ngIf="type === 'teacher'">
   <div class="upload-form">
     <h2>Upload File in Classroom</h2>
     <input type="file" (change)="onFileSelected($event)" />
@@ -11,18 +11,18 @@
         <label for="description">Description:</label>
         <textarea formControlName="description" id="description" name="description" rows="4"></textarea>
       </div>
-      <button type="submit" class="btn">Upload</button>
+      <button type="submit" class="btn btn-primary">Upload</button>
     </form>
   </div>
-  <!-- </div> -->
-  
-    <div class="classroom">
-      <h1>Classroom Name</h1>
-      <div class="files" *ngFor="let file of classroomFiles">
-        <div class="file">
-          <h2 class="file-title">{{ file.filename }}</h2>
-          <p class="file-description">{{ file.description }}</p>
-          <a href="{{ file.url }}">View </a>
-        </div>
-      </div>
+</div>
+
+<div class="classroom">
+  <!-- <h1>Classroom Name</h1> -->
+  <div class="files" *ngFor="let file of classroomFiles">
+    <div class="file">
+      <h2 class="file-title">{{ file.filename }}</h2>
+      <p class="file-description">{{ file.description }}</p>
+      <a href="{{ file.url }}">View</a>
     </div>
+  </div>
+</div>

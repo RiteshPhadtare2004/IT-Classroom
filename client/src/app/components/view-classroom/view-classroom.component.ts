@@ -72,7 +72,7 @@ export class ViewClassroomComponent implements OnInit{
       const formData = new FormData();
       formData.append('file', this.uploadForm.get('file')!.value);      
       formData.append('title', this.uploadForm.get('title')!.value);
-      formData.append('description', this.uploadForm.get('description')!.value);
+      formData.append('description', this.uploadForm.get('title')!.value);
 
       this.http
         .post(`http://localhost:3000/api/classroom/upload/${this.classroomId}`, formData)
