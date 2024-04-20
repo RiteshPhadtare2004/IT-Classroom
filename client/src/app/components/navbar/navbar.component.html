@@ -12,11 +12,11 @@
       </div>
       <div *ngIf="type === 'student'" class="form-container">
         <form (ngSubmit)="joinClassroom()" #f="ngForm">
-          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode" placeholder="Enter Code" required />
+          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode" placeholder="Enter Classroom Code" required />
           <input type="submit" value="Join" />     
         </form>
       </div>
-      <li>Logout</li>
+      <li class="logout" (click)="logout()">Logout</li>
     </ul>
   </div>
 </div>

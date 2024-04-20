@@ -48,13 +48,12 @@ export class TeacherCCComponent implements OnInit {
 
   delete_classroom(classroomId: any){
     console.log(`Classroom id ${classroomId}`)
-    this.http.post('http://localhost:3000/api/classroom/delete', classroomId).subscribe(
+    this.http.delete('http://localhost:3000/api/classroom/delete', classroomId).subscribe(
       (response: any) => {
           this.router.navigate(['/teacher/teacherClassroom']);
       },
       (error) => {
         console.error('Login error:', error);
-        // Handle login error
       }
     );
   }

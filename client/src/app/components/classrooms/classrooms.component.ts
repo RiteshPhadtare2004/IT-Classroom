@@ -15,6 +15,7 @@ export class ClassroomsComponent implements OnInit {
     
   classrooms: any='';
   studentId: any='';
+  classroombool: boolean = true;
 
   constructor(private http: HttpClient,private router: Router,) { }
 
@@ -39,8 +40,12 @@ export class ClassroomsComponent implements OnInit {
 
     this.http.get<any[]>('http://localhost:3000/api/classroom/displayClassroom/' + this.studentId)
       .subscribe(
-        (classrooms) => {
-          this.classrooms = classrooms;
+        (response) => {
+          console.log(response)
+          if(response.length == 0){
+            this.classroombool=false;
+          }
+          this.classrooms = response;
         },
         (error) => {
           console.error('Error fetching classrooms:', error);

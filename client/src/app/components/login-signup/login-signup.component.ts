@@ -1,7 +1,7 @@
 // login-signup.component.ts
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 
@@ -12,9 +12,24 @@ import { Router, RouterOutlet } from '@angular/router';
   templateUrl: './login-signup.component.html',
   styleUrls: ['./login-signup.component.css'],
 })
-export class LoginSignupComponent {
+export class LoginSignupComponent implements OnInit{
   constructor(private router: Router, private http: HttpClient) { }
+  ngOnInit(): void {
+    const userDataString = localStorage.getItem('userData');
+
+    if (userDataString !== null) {
+      const userData = JSON.parse(userDataString);
+      if(userData.role == 'student'){
+        this.router.navigate(['/home']);
+      }else if(userData.role == 'teacher'){
+        this.router.navigate(['/teacher'])
+      }
+    } else {
+      console.log('User is not loged In');
+    }
+  }
   isLogin: boolean = true;
+  
 
   toggleForm() {
     this.isLogin = !this.isLogin;

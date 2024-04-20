@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 
 exports.profile = async (req, res) => {
     try {
-        console.log("abc");
+        // console.log("abc");
         const { studentId } = req.params;
 
         const itUser = await User.findOne({ _id: studentId });

@@ -11,14 +11,14 @@
   justify-content: space-around;
   width: 100%;
   height: 10vh;
-  background-color: #F7EEDD;
+  background-color: #000000;
 }
 .project-name{
   width: 20%;
 }
 .project-name a{
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 30px;
 }
@@ -36,7 +36,7 @@
 }
 .links ul li a{
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
   
 }
 
@@ -55,6 +55,7 @@
 
 .form-container input[type="submit"] {
   background-color: #4CAF50; /* Green */
+  width: 100px;
   color: white;
   border: none;
   cursor: pointer;
@@ -67,4 +68,9 @@
 .form-container input[type="text"]:focus {
   outline: none;
   border-color: #007bff; /* Blue or your preferred focus color */
+}
+
+.logout{
+  cursor: pointer;
+  color: white
 }
