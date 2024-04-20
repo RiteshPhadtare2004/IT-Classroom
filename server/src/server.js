@@ -7,7 +7,7 @@ const noticeRoutes = require('./routes/noticeRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/IT-Classroom', {
+mongoose.connect('mongodb+srv://riteshphadtare12022004:v0LhS9CfiCOy2c9D@cluster0.xwhobtb.mongodb.net/IT-Classroom', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
