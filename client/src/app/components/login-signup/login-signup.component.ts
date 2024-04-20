@@ -27,6 +27,12 @@ export class LoginSignupComponent implements OnInit{
     } else {
       console.log('User is not loged In');
     }
+
+    // Disable back button functionality
+    history.pushState(null, '', location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
   }
   isLogin: boolean = true;
   
