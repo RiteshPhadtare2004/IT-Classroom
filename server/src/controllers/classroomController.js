@@ -173,7 +173,7 @@ exports.getTeacherClassrooms = async (req, res) => {
 
 exports.deleteClassroom = async(req,res)=>{
   try{
-    const {classroomId} = req.body;
+    const {classroomId} = req.params;
     console.log('classroom id: '+classroomId)
 
     if(!classroomId){

@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 
 router.post('/create', classroomController.createClassroom);
 
-router.delete('/delete',classroomController.deleteClassroom)
+router.delete('/delete/:classroomId',classroomController.deleteClassroom)
 
 router.post('/upload/:classroomId',upload.single('file'), classroomController.uploadFile);
 
