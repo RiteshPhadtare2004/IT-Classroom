@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
   styleUrl: './teacher-cc.component.css'
 })
 export class TeacherCCComponent implements OnInit {
-  classrooms: any='';
-  studentId: any='';
+  classrooms: any = '';
+  studentId: any = '';
 
-  constructor(private http: HttpClient,private router: Router,) { }
+  constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit() {
     const userDataString = localStorage.getItem('userData');
@@ -46,14 +46,15 @@ export class TeacherCCComponent implements OnInit {
       );
   }
 
-  delete_classroom(classroomId: any){
+  delete_classroom(classroomId: any) {
     console.log(`Classroom id ${classroomId}`)
-    this.http.delete('http://localhost:3000/api/classroom/delete', classroomId).subscribe(
+    this.http.delete(`http://localhost:3000/api/classroom/delete/${classroomId}`).subscribe(
       (response: any) => {
-          this.router.navigate(['/teacher/teacherClassroom']);
+        this.router.navigate(['/teacher/teacherClassroom']);
+        window.location.reload();
       },
       (error) => {
-        console.error('Login error:', error);
+        console.error('Delete error:', error);
       }
     );
   }
@@ -61,5 +62,5 @@ export class TeacherCCComponent implements OnInit {
   send_classroom(classroomId: any) {
     this.router.navigate(['/home/viewclassroom', classroomId]);
   }
-  
+
 }
