@@ -55,5 +55,18 @@ textarea:focus {
     margin-bottom: 20px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
 }

@@ -1,53 +1,59 @@
-
-*{
+* {
   margin: 0;
   padding: 0;
-  font-family:  "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.nav-bar{
+.nav-bar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 10vh;
   background-color: #000000;
+  padding: 0 20px;
 }
-.project-name{
-  width: 20%;
+
+.project-name {
+  flex: 1;
 }
-.project-name a{
+
+.project-name a {
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
 }
-.links{
-  width: 60%;
+
+.links {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.links ul{
-  font-size: 20px;
+.links ul {
+  font-size: 16px;
   list-style-type: none;
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 20px;
 }
-.links ul li a{
+
+.links ul li a {
   text-decoration: none;
   color: rgb(255, 255, 255);
-  
 }
 
 .form-container {
-  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .form-container input[type="text"],
 .form-container input[type="submit"] {
   padding: 10px;
-  margin-right: 10px; /* Adjust margin as needed */
+  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -70,7 +76,57 @@
   border-color: #007bff; /* Blue or your preferred focus color */
 }
 
-.logout{
+.logout {
   cursor: pointer;
-  color: white
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .project-name {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .links ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .form-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="submit"] {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .form-container input[type="submit"] {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-name a {
+    font-size: 20px;
+  }
+
+  .links ul {
+    font-size: 14px;
+  }
 }

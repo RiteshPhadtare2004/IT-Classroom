@@ -5,14 +5,14 @@
             <p>{{classroom.teacher}}</p>
         </div>
         <div class="card-footer">
-            <a (click)="send_classroom(classroom._id)" >Open</a>
+            <a (click)="send_classroom(classroom._id)">Open</a>
         </div>
     </div>
 </div>
 
 <div class="noclassroom" *ngIf="classroombool == false">
     <div class="border">
-        <p>You have not enrolled to any classrrom, </p>
+        <p>You have not enrolled to any classroom, </p>
         <p>To enroll enter code</p>
     </div>
 </div>

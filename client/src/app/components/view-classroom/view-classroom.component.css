@@ -93,8 +93,6 @@ input[type="file"] {
   background-color: #0056b3;
 }
 
-
-/* Updated CSS for the classroom files section */
 .classroom {
   max-width: 80%;
   margin: 20px auto;
@@ -104,7 +102,6 @@ input[type="file"] {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for each file */
 .file {
   border-radius: 10px;
   overflow: hidden;
@@ -114,25 +111,21 @@ input[type="file"] {
   margin-bottom: 20px;
 }
 
-/* Hover effect for files */
 .file:hover {
   transform: translateY(-5px);
 }
 
-/* Title of the file */
 .file-title {
   margin: 20px;
   font-size: 20px;
   color: #333;
 }
 
-/* Description of the file */
 .file-description {
   margin: 0 20px 20px;
   color: #666;
 }
 
-/* Link to view the file */
 .file a {
   display: inline-block;
   padding: 5px 10px;
@@ -147,4 +140,75 @@ input[type="file"] {
 
 .file a:hover {
   background-color: #0056b3;
+}
+
+/* Responsive CSS */
+@media (max-width: 768px) {
+  .upload-form,
+  .classroom {
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .upload-form h2 {
+    font-size: 20px;
+  }
+
+  input[type="file"],
+  input[type="text"],
+  textarea {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .file-title {
+    font-size: 18px;
+  }
+
+  .file-description,
+  .file a {
+    font-size: 14px;
+    margin: 0 10px 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .upload-form,
+  .classroom {
+    width: 95%;
+    margin: 5px auto;
+    padding: 10px;
+  }
+
+  .upload-form h2 {
+    font-size: 18px;
+  }
+
+  input[type="file"],
+  input[type="text"],
+  textarea {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .file-title {
+    font-size: 16px;
+  }
+
+  .file-description,
+  .file a {
+    font-size: 12px;
+    margin: 0 5px 5px;
+  }
 }

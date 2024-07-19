@@ -1,37 +1,46 @@
 .body {
     margin: 20px;
     margin-top: 25px;
-  }
-  
-  .notice {
-      background-color: #f9f9f9;
-      border-left: 5px solid #3498db;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: space-between;
-  }
-  
-  .notice-title {
-      color: #333;
-      font-size: 20px;
-      margin-bottom: 10px;
-  }
-  
-  .notice-description {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 10px;
-  }
-  
-  .notice-createdby {
-      color: #777;
-      font-style: italic;
-      font-size: 14px;
-  }
-  
-  .btn_get {
+}
+
+.notice {
+    background-color: #f9f9f9;
+    border-left: 5px solid #3498db;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.notice-content {
+    margin-bottom: 15px;
+}
+
+.notice-title {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.notice-description {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.notice-createdby {
+    color: #777;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.notice-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn_get {
     border-width: 1px;
     margin-top: 20px;
 }
@@ -40,12 +49,10 @@
     color: #fff;
     background: #17d511;
     border-color: #17d511;
-    -webkit-box-shadow: none;
     box-shadow: none;
 }
 
 .btn_get_two {
-    -webkit-box-shadow: none;
     box-shadow: none;
     background: #17d511;
     border-color: #17d511;
@@ -56,4 +63,31 @@
 .btn_get_two:hover {
     background: transparent;
     color: #17d511;
+}
+
+@media (max-width: 768px) {
+    .body {
+        margin: 10px;
+        margin-top: 15px;
+    }
+
+    .notice {
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .notice-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn_get {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn_get_two {
+        width: 100%;
+        text-align: center;
+    }
 }
