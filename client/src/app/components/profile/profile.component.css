@@ -1,44 +1,8 @@
-#nav1 {
-    font-weight: bold;
-    text-align: center;
-}
-
-#button1 {
-    margin-top: 20px;
-}
-
-.student-profile .card {
-    border-radius: 10px;
-}
-
-.student-profile .card .card-header .profile_img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    margin: 10px auto;
-    border: 10px solid #ccc;
-    border-radius: 50%;
-}
-
-.student-profile .card h3 {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.student-profile .card p {
-    font-size: 16px;
-    color: #000;
-}
-
-.student-profile .table th,
-.student-profile .table td {
-    font-size: 14px;
-    padding: 5px 10px;
-    color: #000;
-}
-
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
     padding: 20px;
 }
 
@@ -46,36 +10,46 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-container h2 {
+#nav1 {
+    font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.card {
-    margin-bottom: 20px;
+.profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #ccc;
+    margin-top: -75px;
 }
 
-.spacer {
-    height: 26px;
+.card-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.card-body p {
+    font-size: 16px;
+    color: #333;
+}
+
+.table th, .table td {
+    font-size: 14px;
+    padding: 10px;
 }
 
 .button-container {
-    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-
-    .col-lg-4, .col-lg-8 {
-        width: 100%;
-        padding: 0;
-    }
-
     .profile-container {
         padding: 10px;
     }
@@ -84,11 +58,26 @@ body {
         width: 100%;
         margin-top: 20px;
     }
+
+    .table th, .table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .profile_img {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 @media (max-width: 576px) {
-    .student-profile .table th, .student-profile .table td {
-        font-size: 12px;
-        padding: 3px 5px;
+    .table th, .table td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .profile_img {
+        width: 100px;
+        height: 100px;
     }
 }

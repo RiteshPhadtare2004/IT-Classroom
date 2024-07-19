@@ -9,7 +9,7 @@ import { Router, RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink, CommonModule, FormsModule, HttpClientModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
   routes: any = '';
@@ -19,6 +19,8 @@ export class NavbarComponent implements OnInit {
     studentId: '',
     classCode: '',
   };
+  menuOpen: boolean = false;
+
   constructor(private router: Router, private http: HttpClient) {}
 
   studentRoutes: any = {
@@ -33,10 +35,10 @@ export class NavbarComponent implements OnInit {
     notices: '/home/notices',
     createClassroom: '/teacher/createClassroom',
   };
+
   ngOnInit(): void {
     const userDataString = localStorage.getItem('userData');
     if (userDataString !== null) {
-      // Parse the JSON string back to an object
       const userData = JSON.parse(userDataString);
       if (userData.role == 'student') {
         this.type = 'student';
@@ -50,6 +52,10 @@ export class NavbarComponent implements OnInit {
     } else {
       console.log('No userData found in local storage');
     }
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
   joinClassroom() {

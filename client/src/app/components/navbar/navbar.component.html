@@ -1,8 +1,9 @@
 <div class="nav-bar">
   <div class="project-name">
     <a [routerLink]="routes.home">IT Classroom</a>
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
   </div>
-  <div class="links">
+  <div class="links" [ngClass]="{ 'menu-open': menuOpen }">
     <ul>
       <li><a [routerLink]="routes.home">Classroom</a></li>
       <li><a [routerLink]="routes.profile">Profile</a></li>
@@ -13,7 +14,7 @@
       <div *ngIf="type === 'student'" class="form-container">
         <form (ngSubmit)="joinClassroom()" #f="ngForm">
           <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode" placeholder="Enter Classroom Code" required />
-          <input type="submit" value="Join" />     
+          <input type="submit" value="Join" />
         </form>
       </div>
       <li class="logout" (click)="logout()">Logout</li>

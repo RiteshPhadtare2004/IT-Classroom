@@ -1,41 +1,66 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
 .classroom {
     display: flex;
     flex-wrap: wrap;
     padding: 30px;
-    justify-content: space-around;
+    justify-content: center;
     gap: 20px;
 }
 
 .card {
-    width: 250px;
-    background-color: #fff;
-    border-radius: 9px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    width: 280px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
     padding: 20px;
 }
 
+.card-title {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #777;
+}
+
 .card-footer {
     padding: 15px 20px;
+    background-color: #3498db;
+    border-radius: 0 0 15px 15px;
     text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #4CAF50;
+}
+
+.card-footer .btn {
+    background-color: #3498db;
     color: white;
-    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-.card-footer a {
-    color: black;
+    border: none;
+    transition: background-color 0.3s;
     text-decoration: none;
+    font-size: 1rem;
 }
 
-.card-footer:hover {
-    background-color: #3e8e41;
+.card-footer .btn:hover {
+    background-color: #2980b9;
 }
 
 .noclassroom {
@@ -50,14 +75,9 @@
 }
 
 .border {
-    border: 1px dashed black;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
+    border: 2px dashed #3498db;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 /* Responsive styles */
@@ -69,7 +89,7 @@
 
     .card {
         width: 100%;
-        max-width: 300px;
+        max-width: 400px;
     }
 
     .noclassroom {

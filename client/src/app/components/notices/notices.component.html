@@ -2,18 +2,19 @@
     <div *ngIf="type === 'teacher'">
         <app-add-notice-page></app-add-notice-page>
     </div>
-    <div *ngFor="let notice of notices" class="notice">
-        <div class="notice-content">
+    <div *ngFor="let notice of notices" class="notice card shadow-sm mb-4">
+        <div class="notice-content card-body">
             <h3 class="notice-title">{{ notice.title }}</h3>
             <p class="notice-description">{{ notice.description }}</p>
             <p class="notice-createdby">Created by: {{ notice.createdBy }}</p>
         </div>
-        <div class="notice-actions">
-            <button class="btn btn_get btn_get_two" type="submit">View</button>
+        <div class="notice-actions card-footer text-end">
+            <!-- <button class="btn btn-primary me-2" type="button">View</button> -->
             <div *ngIf="type === 'teacher'">
-                <button class="btn btn_get btn_get_two" (click)="deleteNotice(notice._id)">Delete</button>
+                <button class="btn btn-danger" (click)="deleteNotice(notice._id)">Delete</button>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
 </div>
+
+<script src="script.js"></script>
