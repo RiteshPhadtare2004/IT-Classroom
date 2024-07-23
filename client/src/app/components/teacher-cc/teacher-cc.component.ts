@@ -1,18 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-cc',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [HttpClientModule, CommonModule,RouterLink, CommonModule, FormsModule],
   templateUrl: './teacher-cc.component.html',
   styleUrl: './teacher-cc.component.css'
 })
 export class TeacherCCComponent implements OnInit {
   classrooms: any = '';
   studentId: any = '';
+  classroombool: boolean = true;
+  routes: any = {
+    home: '/teacher',
+    profile: '/home/profile',
+    notices: '/home/notices',
+    createClassroom: '/teacher/createClassroom',
+  };
 
   constructor(private http: HttpClient, private router: Router,) { }
 
@@ -38,6 +46,9 @@ export class TeacherCCComponent implements OnInit {
     this.http.get<any[]>('http://localhost:3000/api/classroom/displayTeacherClassroom/' + this.studentId)
       .subscribe(
         (classrooms) => {
+          if(classrooms.length == 0){
+            this.classroombool=false;
+          }
           this.classrooms = classrooms;
         },
         (error) => {

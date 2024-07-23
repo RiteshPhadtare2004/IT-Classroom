@@ -12,3 +12,13 @@
         </div>
     </div>
 </div>
+
+<div class="noclassroom" *ngIf="classroombool == false">
+    <div class="dotted_class">
+        <div class="border p-4 text-center">
+            <p>You have not created any classroom,</p>
+            <p>To create, click on Create Classroom</p>
+            <a [routerLink]="routes.createClassroom" style="text-decoration: none;"><button class="btn btn_get btn_get_two" type="submit">Create Classroom</button></a>
+        </div>
+    </div>
+</div>

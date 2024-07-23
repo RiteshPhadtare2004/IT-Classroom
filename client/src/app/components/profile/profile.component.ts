@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit{
     } else {
       console.log('No userData found in local storage');
     }
-console.log('this is student id '+this.studentId);
+    console.log('this is student id '+this.studentId);
     this.http.get<any[]>('http://localhost:3000/api/profile/userProfile/' + this.studentId)
       .subscribe(
         (response) => {

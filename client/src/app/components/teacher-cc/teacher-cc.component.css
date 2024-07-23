@@ -13,9 +13,85 @@
     margin: 10px;
 }
 
+.new_footer_top .company_widget .f_subscribe_two .btn_get {
+    border-width: 1px;
+    margin-top: 20px;
+    background: black; /* Button background color */
+    color: white!important; /* Button text color */
+    border-color: black; /* Button border color */
+    text-decoration: none;
+}
+
+.btn_get:hover {
+    background: white; /* Hover background color */
+    color: black!important; /* Hover text color */
+    border-color: black; /* Hover border color */
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.btn_get_two {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: black; /* Button background color */
+    border-color: black; /* Button border color */
+    color: white!important; /* Button text color */
+    text-decoration: none;
+}
+/* .btn_get_two a{
+    color: aliceblue;
+}
+.btn_get_two a:hover{
+    color: rgb(0, 0, 0);
+} */
+
+.btn_get_two:hover {
+    background: white; /* Hover background color */
+    color: black; /* Hover text color */
+    border-color: black; /* Hover border color */
+    text-decoration: none;
+}
+
+
 .card-body {
     padding: 20px;
 }
+/* .noclassroom {
+    padding: 40px;
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+} */
+.noclassroom {
+    padding: 40px;
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    /* 2px wide, dotted, black border */
+}
+
+.dotted_class{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    border: 2px dotted #000; 
+}
+
+
+
 
 .open {
     padding: 15px 15px;

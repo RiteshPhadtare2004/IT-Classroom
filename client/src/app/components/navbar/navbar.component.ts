@@ -20,8 +20,30 @@ export class NavbarComponent implements OnInit {
     classCode: '',
   };
   menuOpen: boolean = false;
+  student:any = '';
+  studentId : any= '';
+  constructor(private router: Router, private http: HttpClient) {
+    const userDataString = localStorage.getItem('userData');
 
-  constructor(private router: Router, private http: HttpClient) {}
+    if (userDataString !== null) {
+      // Parse the JSON string back to an object
+      const userData = JSON.parse(userDataString);
+      this.studentId = userData.user_id;
+     
+    } else {
+      console.log('No userData found in local storage');
+    }
+    console.log('this is student id '+this.studentId);
+    this.http.get<any[]>('http://localhost:3000/api/profile/userProfile/' + this.studentId)
+      .subscribe(
+        (response) => {
+          this.student = response;
+        },
+        (error) => {
+          console.error('Error fetching classrooms:', error);
+        }
+      );
+  }
 
   studentRoutes: any = {
     home: '/home',
