@@ -2,10 +2,22 @@ const Classroom = require('../models/classroomModel');
 const User = require('../models/userModel');
 const fs = require('fs');
 const path = require('path');
+const upload = require('../middleware/upload');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 
 const generateRandomCode = () => {
   return Math.floor(10000 + Math.random() * 90000); 
 };
+
+const s3 = new AWS.S3({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
+
+// console.log("Bucket Name:", process.env.AWS_S3_BUCKET_NAME);
+// console.log("Access Key:", process.env.AWS_ACCESS_KEY_ID);
 
 
 exports.createClassroom = async (req, res) => {
@@ -59,27 +71,61 @@ exports.createClassroom = async (req, res) => {
 //     res.status(500).json({ message: 'Internal server error' });
 //   }
 // };
+
+
+
+// exports.uploadFile = async (req, res) => {
+//   try {
+//     const {classroomId} = req.params;
+//     const { filename, path: filePath } = req.file;
+//     const { title, description } = req.body;
+
+//     // Find the classroom
+//     const classroom = await Classroom.findById(classroomId);
+//     if (!classroom) {
+//       fs.unlinkSync(filePath); // Delete the uploaded file
+//       return res.status(404).json({ message: 'Classroom not found' });
+//     }
+
+//     // Add file details to the classroom
+//     classroom.files.push({ filename, title, description, url: filePath });
+//     await classroom.save();
+
+//     res.status(200).json({ message: 'File uploaded successfully' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error'+error });
+//   }
+// };
+
 exports.uploadFile = async (req, res) => {
   try {
-    const {classroomId} = req.params;
-    const { filename, path: filePath } = req.file;
+    const { classroomId } = req.params;
     const { title, description } = req.body;
 
-    // Find the classroom
+    // S3 info from multerS3
+    const fileUrl = req.file.location; // S3 file URL
+    const fileName = req.file.originalname;
+
     const classroom = await Classroom.findById(classroomId);
     if (!classroom) {
-      fs.unlinkSync(filePath); // Delete the uploaded file
       return res.status(404).json({ message: 'Classroom not found' });
     }
 
-    // Add file details to the classroom
-    classroom.files.push({ filename, title, description, url: filePath });
+    // Save file info to DB
+    classroom.files.push({
+      filename: fileName,
+      title,
+      description,
+      url: fileUrl
+    });
+
     await classroom.save();
 
-    res.status(200).json({ message: 'File uploaded successfully' });
+    res.status(200).json({ message: 'File uploaded to S3 successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error'+error });
+    res.status(500).json({ message: 'Upload failed', error: error.message });
   }
 };
 
@@ -131,7 +177,7 @@ exports.viewFiles = async (req, res) => {
     // Construct file URLs
     const filesWithUrls = classroom.files.map(file => ({
       ...file.toObject(),
-      url: `${baseUrl}/uploads/${file.filename}` // Construct URL for accessing the file
+      url: file.url // Construct URL for accessing the file
     }));
 
     res.status(200).json(filesWithUrls);

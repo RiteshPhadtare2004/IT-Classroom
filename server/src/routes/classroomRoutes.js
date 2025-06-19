@@ -1,38 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
 const classroomController = require('../controllers/classroomController');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const authMiddleware = require('../middleware/authMiddleware');
 
+// 👇 Use the new upload middleware for S3
+const upload = require('../middleware/upload');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, '../uploads')); // Destination folder for file uploads
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname); // File naming strategy
-    }
-  });
-  
-  const upload = multer({ storage });
-  
-
+// Create classroom
 router.post('/create', classroomController.createClassroom);
 
-router.delete('/delete/:classroomId',classroomController.deleteClassroom)
+// Delete classroom
+router.delete('/delete/:classroomId', classroomController.deleteClassroom);
 
-router.post('/upload/:classroomId',upload.single('file'), classroomController.uploadFile);
+// ✅ Upload file to S3 (IMPORTANT: This is now using multer-s3)
+router.post('/upload/:classroomId', upload.single('file'), classroomController.uploadFile);
 
-router.post('/join',  classroomController.joinClassroom);
+// Join classroom
+router.post('/join', classroomController.joinClassroom);
 
+// View files in classroom
 router.get('/files/:classroomId', classroomController.viewFiles);
 
-router.get('/displayClassroom/:studentId',classroomController.displayClassroom);
+// Get classrooms for a student
+router.get('/displayClassroom/:studentId', classroomController.displayClassroom);
 
-router.get('/displayTeacherClassroom/:teacherId',classroomController.getTeacherClassrooms);
+// Get classrooms for a teacher
+router.get('/displayTeacherClassroom/:teacherId', classroomController.getTeacherClassrooms);
 
+// (Optional) Default route for classroom
 router.get('/home', classroomController.displayClassroom);
 
 module.exports = router;
