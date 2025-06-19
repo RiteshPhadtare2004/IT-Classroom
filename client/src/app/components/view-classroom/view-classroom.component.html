@@ -18,12 +18,23 @@
 </div>
 
 <div class="classroom">
-  <!-- <h1>Classroom Name</h1> -->
   <div class="files" *ngFor="let file of classroomFiles">
     <div class="file">
       <h2 class="file-title">{{ file.filename }}</h2>
       <p class="file-description">{{ file.description }}</p>
-      <a href="{{ file.url }}">View</a>
+      <a href="{{ file.url }}" target="_blank" rel="noopener noreferrer">View</a>
+      <div *ngIf="type === 'teacher'">  
+        <button class="btn btn-danger" (click)="deleteFile(file._id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="noclassroom" *ngIf="classroomFiles.length === 0">
+  <div class="dotted_class">
+    <div class="border p-4 text-center">
+      <p>No files uploaded in this classroom.</p>
+      <p>To upload, use the form above.</p>
     </div>
   </div>
 </div>

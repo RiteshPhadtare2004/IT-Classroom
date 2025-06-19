@@ -43,61 +43,6 @@ exports.createClassroom = async (req, res) => {
   }
 };
 
-// exports.uploadFile = async (req, res) => {
-//   try {
-//     const classroomId = req.params.classroomId;
-//     const { filename, path: filePath } = req.file;
-//     const { title, description, teacherId } = req.body;
-
-//     // Find the classroom
-//     const classroom = await Classroom.findById(classroomId);
-//     if (!classroom) {
-//       fs.unlinkSync(filePath); // Delete the uploaded file
-//       return res.status(404).json({ message: 'Classroom not found' });
-//     }
-
-//     // Move the file to the desired location
-//     const uploadDir = path.join(__dirname, '../uploads'); // Assuming uploads folder exists
-//     const newFilePath = path.join(uploadDir, filename);
-//     fs.renameSync(filePath, newFilePath);
-
-//     // Add file details to the classroom
-//     classroom.files.push({ filename, title, description, url: newFilePath });
-//     await classroom.save();
-
-//     res.status(200).json({ message: 'File uploaded successfully' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
-
-
-// exports.uploadFile = async (req, res) => {
-//   try {
-//     const {classroomId} = req.params;
-//     const { filename, path: filePath } = req.file;
-//     const { title, description } = req.body;
-
-//     // Find the classroom
-//     const classroom = await Classroom.findById(classroomId);
-//     if (!classroom) {
-//       fs.unlinkSync(filePath); // Delete the uploaded file
-//       return res.status(404).json({ message: 'Classroom not found' });
-//     }
-
-//     // Add file details to the classroom
-//     classroom.files.push({ filename, title, description, url: filePath });
-//     await classroom.save();
-
-//     res.status(200).json({ message: 'File uploaded successfully' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error'+error });
-//   }
-// };
-
 exports.uploadFile = async (req, res) => {
   try {
     const { classroomId } = req.params;
@@ -234,4 +179,38 @@ exports.deleteClassroom = async(req,res)=>{
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
+
+
+exports.deleteFile = async (req, res) => {
+  try {
+    const { classroomId, fileId } = req.params;
+
+    const classroom = await Classroom.findById(classroomId);
+    if (!classroom) {
+      return res.status(404).json({ message: 'Classroom not found' });
+    }
+
+    const fileIndex = classroom.files.findIndex(f => f._id.toString() === fileId);
+    if (fileIndex === -1) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    const file = classroom.files[fileIndex];
+    const s3Key = decodeURIComponent(new URL(file.url).pathname.substring(1));
+
+    await s3.deleteObject({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: s3Key,
+    }).promise();
+
+    classroom.files.splice(fileIndex, 1);
+    await classroom.save();
+
+    res.status(200).json({ message: 'File deleted from MongoDB and S3' });
+  } catch (error) {
+    console.error('Delete error:', error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+};
+

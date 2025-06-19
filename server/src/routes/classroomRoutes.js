@@ -30,4 +30,6 @@ router.get('/displayTeacherClassroom/:teacherId', classroomController.getTeacher
 // (Optional) Default route for classroom
 router.get('/home', classroomController.displayClassroom);
 
+router.delete('/:classroomId/file/:fileId', classroomController.deleteFile);
+
 module.exports = router;

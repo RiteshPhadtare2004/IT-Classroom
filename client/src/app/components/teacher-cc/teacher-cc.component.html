@@ -2,7 +2,7 @@
     <div *ngFor="let classroom of classrooms" class="card">
         <div class="card-body">
             <h2>{{classroom.name}}</h2>
-            <!-- <p>{{classroom.teacher}}</p> -->
+            <p>Code: {{classroom.code}}</p>
         </div>
         <div class="open">
             <a (click)="send_classroom(classroom._id)">Open</a>

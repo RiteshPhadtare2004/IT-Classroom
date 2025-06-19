@@ -89,4 +89,23 @@ export class ViewClassroomComponent implements OnInit{
       console.log('Form is invalid');
     }
   }
+
+  deleteFile(fileId: string) {
+  if (confirm('Are you sure you want to delete this file?')) {
+    this.http
+      .delete(`http://localhost:3000/api/classroom/${this.classroomId}/file/${fileId}`)
+      .subscribe(
+        (response) => {
+          console.log('File deleted:', response);
+          // Refresh list
+          this.classroomFiles = this.classroomFiles.filter((file: { _id: string; }) => file._id !== fileId);
+        },
+        (error) => {
+          console.error('Error deleting file:', error);
+        }
+      );
+  }
+}
+
+
 }

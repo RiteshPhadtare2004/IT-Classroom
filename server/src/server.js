@@ -13,7 +13,7 @@ console.log("Bucket Name:", process.env.AWS_S3_BUCKET_NAME);
 console.log("Access Key:", process.env.AWS_ACCESS_KEY_ID);
 
 
-mongoose.connect('mongodb+srv://riteshphadtare12022004:v0LhS9CfiCOy2c9D@cluster0.xwhobtb.mongodb.net/IT-Classroom', {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
