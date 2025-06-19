@@ -1,7 +1,14 @@
 <div class="nav-bar">
   <div class="project-name">
-    <h3 class="mt-2">{{student.username}}</h3>
-    <p class="mb-0"><strong class="pr-1"></strong>{{student.email}}</p> 
+    <div class="user-info">
+      <div class="user-avatar">
+        <span>{{ student.username.charAt(0) | uppercase }}</span>
+      </div>
+      <div class="user-details">
+        <h4>{{ student.username }}</h4>
+        <p>{{ student.email }}</p>
+      </div>
+    </div>
     <a [routerLink]="routes.home">IT Classroom</a>
     <button class="menu-toggle" (click)="toggleMenu()">☰</button>
   </div>
@@ -15,7 +22,8 @@
       </div>
       <div *ngIf="type === 'student'" class="form-container">
         <form (ngSubmit)="joinClassroom()" #f="ngForm">
-          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode" placeholder="Enter Classroom Code" required />
+          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode"
+            placeholder="Enter Classroom Code" required />
           <input type="submit" value="Join" />
         </form>
       </div>
