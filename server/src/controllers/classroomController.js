@@ -20,7 +20,7 @@ exports.createClassroom = async (req, res) => {
       return res.status(403).json({ message: 'Forbidden: Only teachers can create classrooms' });
     }
     const code = generateRandomCode(); 
-    const classroom = new Classroom({ code,name, teacher: teacherUser._id  });
+    const classroom = new Classroom({ code,name, teacher: teacherUser._id, teacherName: teacherUser.username });
     await classroom.save();
 
     

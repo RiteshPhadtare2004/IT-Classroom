@@ -1,8 +1,8 @@
 <div class="classroom" *ngIf="classroombool == true">
     <div *ngFor="let classroom of classrooms" class="card shadow-sm mb-4">
         <div class="card-body">
-            <h2 class="card-title">{{classroom.name}}ab</h2>
-            <p class="card-text">Instructor: {{classroom.teacher}}</p>
+            <h2 class="card-title">{{classroom.name}}</h2>
+            <p class="card-text">Instructor: {{classroom.teacherName}}</p>
         </div>
         <div class="card-footer text-center">
             <a (click)="send_classroom(classroom._id)" class="btn btn-primary">Open</a>

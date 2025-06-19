@@ -16,7 +16,7 @@ export class LoginSignupComponent implements OnInit{
   constructor(private router: Router, private http: HttpClient) { }
   ngOnInit(): void {
     const userDataString = localStorage.getItem('userData');
-
+    
     if (userDataString !== null) {
       const userData = JSON.parse(userDataString);
       if(userData.role == 'student'){
