@@ -1,14 +1,18 @@
 <div class="nav-bar">
   <!-- USER INFO -->
-  <div class="user-info">
-    <!-- <div class="user-avatar">
+  <!-- <div class="user-info">
+    <div class="user-avatar">
       <span>{{ student?.username?.charAt(0) | uppercase }}</span>
-    </div> -->
+    </div>
     <div class="user-details">
       <h4>{{ student?.username }}</h4>
       <p>{{ student?.email }}</p>
     </div>
-  </div>
+  </div> -->
+
+  <!-- Add this if want you use condition in tags  -->
+  <!-- *ngIf="type === 'teacher'" -->
+
 
   <!-- TITLE -->
   <a [routerLink]="routes.home" class="brand">IT Classroom</a>
@@ -25,8 +29,9 @@
       </li>
 
       <li *ngIf="type === 'student'" class="form-container">
-        <form (ngSubmit)="joinClassroom()" #f="ngForm" >
-          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode" placeholder="Enter Classroom Code" required />
+        <form (ngSubmit)="joinClassroom()" #f="ngForm">
+          <input type="text" name="classCode" [(ngModel)]="joinClassroomData.classCode"
+            placeholder="Enter Classroom Code" required />
           <input type="submit" value="Join" />
         </form>
       </li>
