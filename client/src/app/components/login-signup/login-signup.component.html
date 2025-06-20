@@ -1,48 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Signup Form</title>
-  </head>
-  <body>
-    
-    <h1 id="it-class">IT Classroom</h1>
-    <div class="wrapper" [ngClass]="{'active': !isLogin}">  
-      <div class="form signup">
-        <header (click)="toggleForm()">Signup</header>
-        <form (ngSubmit)="onSignup()" #f="ngForm">
-          <input type="text" name="username" [(ngModel)]="formSignup.username" placeholder="Full name" required />
-          <input type="text" name="email" [(ngModel)]="formSignup.email" placeholder="Email address" required />
-          <div class="radioB">
-            <input type="radio" id="teacher" name="role" [(ngModel)]="formSignup.role" value="teacher" required />
-            <label for="teacher">Teacher</label>
-            <input type="radio" id="student" name="role" [(ngModel)]="formSignup.role" value="student" required />
-            <label for="student">Student</label>
-          </div>
-          <input type="password" name="password" [(ngModel)]="formSignup.password" placeholder="Password" required />
-          <div class="checkbox">
-            <input type="checkbox" id="signupCheck" [(ngModel)]="acceptTerms" name="acceptTerms" required />
-            <label for="signupCheck">I accept all terms & conditions</label>
-          </div>
-          <input type="submit" value="Signup" />
-        </form>
-        
-      </div>
 
-      <div class="form login">
-        <header (click)="toggleForm()">Login</header>
-        <form class="loginF" (ngSubmit)="onLogin()" #f="ngForm">
-          <input type="text" name="emailLogin" [(ngModel)]="formLogin.emailLogin" placeholder="Email address" required />
-          <input type="password" name="passwordLogin" [(ngModel)]="formLogin.passwordLogin" placeholder="Password" required />
-          <a href="#">Forgot password?</a>
-          <input type="submit" value="Login" />
-        </form>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Signup Form</title>
+</head>
+
+<body>
+
+  <h1 id="it-class">IT Classroom</h1>
+  <div class="wrapper" [ngClass]="{'active': !isLogin}">
+    <div class="form signup">
+      <header (click)="toggleForm()">Signup</header>
+      <form (ngSubmit)="onSignup()" #f="ngForm">
+        <input type="text" name="username" [(ngModel)]="formSignup.username" placeholder="Full name" required />
+        <input type="text" name="email" [(ngModel)]="formSignup.email" placeholder="Email address" required />
+        <div class="radioB">
+          <input type="radio" id="teacher" name="role" [(ngModel)]="formSignup.role" value="teacher" required />
+          <label for="teacher">Teacher</label>
+          <input type="radio" id="student" name="role" [(ngModel)]="formSignup.role" value="student" required />
+          <label for="student">Student</label>
+        </div>
+        <input type="password" name="password" [(ngModel)]="formSignup.password" placeholder="Password" required />
+        <div class="checkbox">
+          <input type="checkbox" id="signupCheck" [(ngModel)]="acceptTerms" name="acceptTerms" required />
+          <label for="signupCheck">I accept all terms & conditions</label>
+        </div>
+        <input type="submit" value="Signup" />
+      </form>
 
     </div>
-</body>
-</html>
- 
 
+    <div class="form login">
+      <header (click)="toggleForm()">Login</header>
+      <form class="loginF" (ngSubmit)="onLogin()" #f="ngForm">
+        <input type="text" name="emailLogin" [(ngModel)]="formLogin.emailLogin" placeholder="Email address" required />
+        <input type="password" name="passwordLogin" [(ngModel)]="formLogin.passwordLogin" placeholder="Password"
+          required />
+        <a href="#">Forgot password?</a>
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+
+  </div>
+  <!-- Loading Spinner -->
+  <div class="overlay" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Custom Popup -->
+  <!-- <div class="popup" *ngIf="popupMessage">
+    <div class="popup-content">
+      <p>{{ popupMessage }}</p>
+      <button (click)="popupMessage = ''">OK</button>
+    </div>
+  </div> -->
+
+  <div class="popup-backdrop" *ngIf="popupMessage">
+    <div class="popup-enhanced">
+      <span class="popup-close" (click)="popupMessage = ''">&times;</span>
+      <p class="popup-text">{{ popupMessage }}</p>
+      <button class="popup-button" (click)="popupMessage = ''">Okay</button>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

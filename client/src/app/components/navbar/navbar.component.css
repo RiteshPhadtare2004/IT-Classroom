@@ -1,198 +1,230 @@
+/* Base Reset */
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
+/* NAVBAR WRAPPER */
 .nav-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 10vh;
-  background-color: #000000;
-  padding: 0 20px;
-  position: relative;
-}
-
-.project-name {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.project-name a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
+  flex-wrap: nowrap;
+  padding: 20px 25px;
+  background-color: #000;
   color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.links {
-  flex: 3;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.links ul {
-  font-size: 16px;
-  list-style-type: none;
-  display: flex;
-  align-items: center;
   gap: 20px;
 }
 
-.links ul li a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
+
+/* LEFT SIDE */
+.project-name {
+  display: flex;
+  align-items: center;
+  justify-content: safe;
+  width: 100%;
 }
 
+/* BRAND */
+
+.brand {
+  font-size: 27px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  margin: 0 20px;
+  flex-shrink: 0;
+}
+
+.project-name a {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+/* HAMBURGER BUTTON */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* USER INFO */
+.user-info {
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-details h4,
+.user-details p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-details h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+}
+
+.user-details p {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* NAV LINKS */
+.links {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.links ul {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links ul li {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.links ul li a,
+.logout {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.links ul li a:hover,
+.logout:hover {
+  background-color: #222;
+}
+
+/* FORM */
 .form-container {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .form-container input[type="text"],
 .form-container input[type="submit"] {
-  padding: 10px;
-  margin-right: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  outline: none;
 }
 
 .form-container input[type="submit"] {
-  background-color: #4CAF50; /* Green */
-  width: 100px;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .form-container input[type="submit"]:hover {
-  background-color: #45a049; /* Darker green */
+  background-color: #45a049;
 }
 
-.form-container input[type="text"]:focus {
-  outline: none;
-  border-color: #007bff; /* Blue or your preferred focus color */
-}
+/* ============================
+   RESPONSIVE STYLES
+============================ */
 
-.logout {
-  cursor: pointer;
-  color: white;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  margin-right: 20px;
-  background-color: #1a1a1a;
-  padding: 8px 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #4CAF50;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-.user-details h4 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.user-details p {
-  margin: 0;
-  font-size: 12px;
-  color: #cccccc;
-}
-
-
-/* Responsive styles */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
-    position: absolute;
-    right: 20px;
   }
 
   .links {
-    display: none;
+    max-height: 0;
     flex-direction: column;
-    align-items: center;
+    background-color: #000;
     width: 100%;
-    position: absolute;
-    top: 10vh; /* Position the dropdown below the navbar */
-    left: 0;
-    background-color: #000000;
-    z-index: 1;
+    overflow: hidden;
   }
 
   .links.menu-open {
-    display: flex;
+    max-height: 500px;
+    padding: 10px 0;
   }
 
   .links ul {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
     width: 100%;
-    text-align: center;
-    padding: 20px 0; /* Add some padding for better spacing */
   }
 
   .links ul li {
     width: 100%;
+    text-align: center;
   }
 
-  .links ul li a {
+  .links ul li a,
+  .logout {
     display: block;
     width: 100%;
     padding: 10px 0;
-    color: white;
-    text-decoration: none;
-  }
-
-  .links ul li a:hover {
-    background-color: #333;
   }
 
   .form-container {
     flex-direction: column;
-    align-items: stretch;
+    width: 90%;
+    margin: auto;
   }
 
-  .form-container input[type="text"],
-  .form-container input[type="submit"] {
+  .form-container input {
     width: 100%;
-    margin: 5px 0;
   }
 
-  .form-container input[type="submit"] {
-    margin-bottom: 10px;
+  .user-info {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .user-details p {
+    display: none;
+  }
+
+  .project-name {
+    flex-wrap: wrap;
   }
 }
 
@@ -201,7 +233,17 @@
     font-size: 20px;
   }
 
-  .links ul {
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .user-details h4 {
     font-size: 14px;
+  }
+
+  .form-container input[type="submit"] {
+    font-size: 13px;
   }
 }
