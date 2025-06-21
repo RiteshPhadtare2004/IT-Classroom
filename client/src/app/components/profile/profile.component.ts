@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, CommonModule, FormsModule, HttpClientModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -23,15 +23,20 @@ export class ProfileComponent implements OnInit {
   };
 
   studentId: string = '';
-
-  constructor(private http: HttpClient, private router: Router) {}
-
+  type: any = 'teacher';
+  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) {}
   ngOnInit(): void {
     const userDataString = localStorage.getItem('userData');
 
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       this.studentId = userData.user_id;
+      if (userData.role == 'student') {
+        this.type = 'student'
+
+      } else {
+        this.type = 'teacher'
+      }
 
       this.getProfileData(this.studentId);
     } else {
