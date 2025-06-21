@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const Profile = require('../models/profileModel');
 const AWS = require('aws-sdk');
 
-// Set up S3 instance (needed for deleting old profile picture)
+// S3 instance for deleting old images
 const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -16,7 +16,7 @@ exports.profile = async (req, res) => {
     const user = await User.findById(studentId);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    let profile = await Profile.findOne({ userId: studentId });
+    const profile = await Profile.findOne({ userId: studentId });
 
     if (!profile) {
       return res.status(200).json({
@@ -39,7 +39,7 @@ exports.updateProfile = async (req, res) => {
     const { studentId } = req.params;
     const { name, email, role, roll, academicYear, gender, bio } = req.body;
 
-    let user = await User.findById(studentId);
+    const user = await User.findById(studentId);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     let profile = await Profile.findOne({ userId: studentId });
@@ -75,7 +75,7 @@ exports.updateProfile = async (req, res) => {
 
 exports.uploadProfilePicture = async (req, res) => {
   try {
-    const { email } = req.body;
+    const email = req.query.email;
 
     if (!req.file || !req.file.location) {
       return res.status(400).json({ message: 'No file uploaded' });
@@ -88,20 +88,19 @@ exports.uploadProfilePicture = async (req, res) => {
       return res.status(404).json({ message: 'Profile not found' });
     }
 
-    // Delete old picture if exists
     if (profile.profilePicture) {
       try {
-        const oldKey = new URL(profile.profilePicture).pathname.substring(1); // Remove '/'
+        const oldKey = new URL(profile.profilePicture).pathname.substring(1);
         await s3.deleteObject({
           Bucket: process.env.AWS_S3_BUCKET_NAME,
           Key: oldKey
         }).promise();
       } catch (err) {
-        console.warn('Failed to delete old profile image from S3:', err.message);
+        console.warn('Failed to delete old profile picture from S3:', err.message);
       }
     }
 
-    // Save new picture
+    // Save new profile picture URL
     profile.profilePicture = fileUrl;
     await profile.save();
 

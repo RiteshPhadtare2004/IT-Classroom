@@ -87,19 +87,21 @@ export class ProfileComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    formData.append('email', this.student.email); // for s3 key path
 
-    this.http.post<any>('http://localhost:3000/api/profile/uploadPhoto', formData)
-      .subscribe({
-        next: (res) => {
-          this.student.profilePicture = res.imageUrl; // set for preview
-          alert('Profile picture updated!');
-        },
-        error: (err) => {
-          console.error('Upload failed', err);
-          alert('Profile picture upload failed.');
-        }
-      });
+    const encodedEmail = encodeURIComponent(this.student.email); // safe for URL
+    const uploadUrl = `http://localhost:3000/api/profile/uploadPhoto?email=${encodedEmail}`;
+
+    this.http.post<any>(uploadUrl, formData).subscribe({
+      next: (res) => {
+        this.student.profilePicture = res.imageUrl; // Preview update
+        alert('Profile picture updated!');
+      },
+      error: (err) => {
+        console.error('Upload failed', err);
+        alert('Profile picture upload failed.');
+      }
+    });
   }
+
 
 }
