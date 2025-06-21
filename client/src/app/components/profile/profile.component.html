@@ -5,6 +5,13 @@
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
       <div class="card shadow-sm text-center">
         <div class="card-header bg-transparent">
+          <!-- Profile Image Preview -->
+          <img *ngIf="student.profilePicture" [src]="student.profilePicture" alt="Profile"
+            class="rounded-circle img-fluid mb-2" style="width: 120px; height: 120px; object-fit: cover;" />
+
+          <!-- File Input -->
+          <input type="file" (change)="onFileSelected($event)" class="form-control mt-2" />
+
           <!-- <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile_img rounded-circle img-fluid"> -->
           <h3 class="mt-2">{{student.name}}</h3>
         </div>

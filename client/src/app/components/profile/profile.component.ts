@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
 
   studentId: string = '';
   type: any = 'teacher';
-  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) {}
+  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
   ngOnInit(): void {
     const userDataString = localStorage.getItem('userData');
 
@@ -71,4 +71,35 @@ export class ProfileComponent implements OnInit {
         }
       });
   }
+
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.uploadProfilePicture();
+    }
+  }
+
+  uploadProfilePicture(): void {
+    if (!this.selectedFile || !this.student.email) return;
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    formData.append('email', this.student.email); // for s3 key path
+
+    this.http.post<any>('http://localhost:3000/api/profile/uploadPhoto', formData)
+      .subscribe({
+        next: (res) => {
+          this.student.profilePicture = res.imageUrl; // set for preview
+          alert('Profile picture updated!');
+        },
+        error: (err) => {
+          console.error('Upload failed', err);
+          alert('Profile picture upload failed.');
+        }
+      });
+  }
+
 }

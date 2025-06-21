@@ -1,5 +1,13 @@
 const User = require('../models/userModel');
 const Profile = require('../models/profileModel');
+const AWS = require('aws-sdk');
+
+// Set up S3 instance (needed for deleting old profile picture)
+const s3 = new AWS.S3({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
 
 exports.profile = async (req, res) => {
   try {
@@ -10,7 +18,6 @@ exports.profile = async (req, res) => {
 
     let profile = await Profile.findOne({ userId: studentId });
 
-    // If no separate profile yet, return base user data
     if (!profile) {
       return res.status(200).json({
         name: user.username,
@@ -38,7 +45,6 @@ exports.updateProfile = async (req, res) => {
     let profile = await Profile.findOne({ userId: studentId });
 
     if (!profile) {
-      // Create new profile
       profile = new Profile({
         userId: studentId,
         name,
@@ -50,7 +56,6 @@ exports.updateProfile = async (req, res) => {
         bio
       });
     } else {
-      // Update existing profile
       profile.name = name;
       profile.email = email;
       profile.role = role;
@@ -65,5 +70,44 @@ exports.updateProfile = async (req, res) => {
   } catch (error) {
     console.error('Error saving profile:', error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+exports.uploadProfilePicture = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!req.file || !req.file.location) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const fileUrl = req.file.location;
+
+    const profile = await Profile.findOne({ email });
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    // Delete old picture if exists
+    if (profile.profilePicture) {
+      try {
+        const oldKey = new URL(profile.profilePicture).pathname.substring(1); // Remove '/'
+        await s3.deleteObject({
+          Bucket: process.env.AWS_S3_BUCKET_NAME,
+          Key: oldKey
+        }).promise();
+      } catch (err) {
+        console.warn('Failed to delete old profile image from S3:', err.message);
+      }
+    }
+
+    // Save new picture
+    profile.profilePicture = fileUrl;
+    await profile.save();
+
+    return res.status(200).json({ message: 'Profile picture uploaded successfully!', imageUrl: fileUrl });
+  } catch (error) {
+    console.error('Error uploading profile picture:', error);
+    res.status(500).json({ message: 'Upload failed', error: error.message });
   }
 };

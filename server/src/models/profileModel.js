@@ -8,7 +8,8 @@ const profileSchema = new mongoose.Schema({
   roll:          { type: String },
   academicYear:  { type: String },
   gender:        { type: String },
-  bio:           { type: String }
+  bio:           { type: String },
+  profilePicture: { type: String, default: '' } 
 });
 
 const Profile = mongoose.model('Profile', profileSchema);
