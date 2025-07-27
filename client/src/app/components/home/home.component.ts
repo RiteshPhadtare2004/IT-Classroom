@@ -3,6 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { ClassroomsComponent } from '../classrooms/classrooms.component';
 import { FooterComponent } from '../footer/footer.component';
 import { RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',

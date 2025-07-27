@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -45,7 +46,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfileData(studentId: string): void {
-    this.http.get<any>('http://localhost:3000/api/profile/userProfile/' + studentId)
+    this.http.get<any>(`${environment.apiUrl}/api/profile/userProfile/` + studentId)
       .subscribe({
         next: (response) => {
           this.student = {
@@ -60,7 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile(): void {
-    this.http.post('http://localhost:3000/api/profile/updateProfile/' + this.studentId, this.student)
+    this.http.post(`${environment.apiUrl}/api/profile/updateProfile/` + this.studentId, this.student)
       .subscribe({
         next: (response) => {
           alert('Profile updated successfully!');
@@ -89,7 +90,7 @@ export class ProfileComponent implements OnInit {
     formData.append('file', this.selectedFile);
 
     const encodedEmail = encodeURIComponent(this.student.email); // safe for URL
-    const uploadUrl = `http://localhost:3000/api/profile/uploadPhoto?email=${encodedEmail}`;
+    const uploadUrl = `${environment.apiUrl}/api/profile/uploadPhoto?email=${encodedEmail}`;
 
     this.http.post<any>(uploadUrl, formData).subscribe({
       next: (res) => {

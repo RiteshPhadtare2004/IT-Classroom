@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-view-classroom',
@@ -30,7 +31,7 @@ export class ViewClassroomComponent implements OnInit{
       console.log('Classroom ID:', this.classroomId);
     });
 
-    this.http.get<any[]>('http://localhost:3000/api/classroom/files/'+this.classroomId)
+    this.http.get<any[]>(`${environment.apiUrl}/api/classroom/files/`+this.classroomId)
       .subscribe(
         (response) => {
           console.log(response)
@@ -75,7 +76,7 @@ export class ViewClassroomComponent implements OnInit{
       formData.append('description', this.uploadForm.get('description')!.value);
 
       this.http
-        .post(`http://localhost:3000/api/classroom/upload/${this.classroomId}`, formData)
+        .post(`${environment.apiUrl}/api/classroom/upload/${this.classroomId}`, formData)
         .subscribe(
           (response: any) => {
             console.log('File uploaded successfully:', response);
@@ -93,7 +94,7 @@ export class ViewClassroomComponent implements OnInit{
   deleteFile(fileId: string) {
   if (confirm('Are you sure you want to delete this file?')) {
     this.http
-      .delete(`http://localhost:3000/api/classroom/${this.classroomId}/file/${fileId}`)
+      .delete(`${environment.apiUrl}/api/classroom/${this.classroomId}/file/${fileId}`)
       .subscribe(
         (response) => {
           console.log('File deleted:', response);

@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -34,7 +35,7 @@ export class NavbarComponent implements OnInit {
       console.log('No userData found in local storage');
     }
     console.log('this is student id '+this.studentId);
-    this.http.get<any[]>('http://localhost:3000/api/profile/userProfile/' + this.studentId)
+    this.http.get<any[]>(`${environment.apiUrl}/api/profile/userProfile/` + this.studentId)
       .subscribe(
         (response) => {
           this.student = response;
@@ -83,7 +84,7 @@ export class NavbarComponent implements OnInit {
   joinClassroom() {
     this.joinClassroomData.studentId = this.id;
     this.http
-      .post('http://localhost:3000/api/classroom/join', this.joinClassroomData)
+      .post(`${environment.apiUrl}/api/classroom/join`, this.joinClassroomData)
       .subscribe(
         (response: any) => {
           window.location.reload();

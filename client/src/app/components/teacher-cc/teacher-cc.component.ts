@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-teacher-cc',
   standalone: true,
@@ -43,7 +43,7 @@ export class TeacherCCComponent implements OnInit {
       return;
     }
 
-    this.http.get<any[]>('http://localhost:3000/api/classroom/displayTeacherClassroom/' + this.studentId)
+    this.http.get<any[]>(`${environment.apiUrl}/api/classroom/displayTeacherClassroom/` + this.studentId)
       .subscribe(
         (classrooms) => {
           if(classrooms.length == 0){
@@ -59,7 +59,7 @@ export class TeacherCCComponent implements OnInit {
 
   delete_classroom(classroomId: any) {
     console.log(`Classroom id ${classroomId}`)
-    this.http.delete(`http://localhost:3000/api/classroom/delete/${classroomId}`).subscribe(
+    this.http.delete(`${environment.apiUrl}/api/classroom/delete/${classroomId}`).subscribe(
       (response: any) => {
         this.router.navigate(['/teacher/teacherClassroom']);
         window.location.reload();

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-classrooms',
@@ -38,7 +39,7 @@ export class ClassroomsComponent implements OnInit {
       return;
     }
 
-    this.http.get<any[]>('http://localhost:3000/api/classroom/displayClassroom/' + this.studentId)
+    this.http.get<any[]>(`${environment.apiUrl}/api/classroom/displayClassroom/` + this.studentId)
       .subscribe(
         (response) => {
           console.log(response)

@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login-signup',
@@ -101,7 +102,7 @@ export class LoginSignupComponent implements OnInit {
   onLogin() {
     this.isLoading = true;
 
-    this.http.post('http://localhost:3000/api/login', this.formLogin).subscribe(
+    this.http.post(`${environment.apiUrl}/api/login`, this.formLogin).subscribe(
       (response: any) => {
         this.isLoading = false;
         if (response.token) {
@@ -173,7 +174,7 @@ export class LoginSignupComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.http.post('http://localhost:3000/api/signup', this.formSignup).subscribe(
+    this.http.post(`${environment.apiUrl}/api/signup`, this.formSignup).subscribe(
       (response: any) => {
         this.isLoading = false;
         if (response.message === 'User created successfully') {

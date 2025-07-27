@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-add-notice-page',
@@ -38,7 +39,7 @@ export class AddNoticePageComponent implements OnInit {
 
   onSubmit() {
 
-    this.http.post('http://localhost:3000/api/notices/createNotice', this.fromdata).subscribe(
+    this.http.post(`${environment.apiUrl}/api/notices/createNotice`, this.fromdata).subscribe(
       (response: any) => {
           this.router.navigate(['/home/notices']);
       },

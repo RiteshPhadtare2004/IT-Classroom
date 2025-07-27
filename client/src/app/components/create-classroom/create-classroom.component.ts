@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-create-classroom',
@@ -33,7 +34,7 @@ export class CreateClassroomComponent implements OnInit {
 
   createClass() {
     this.http
-      .post('http://localhost:3000/api/classroom/create', this.classData)
+      .post(`${environment.apiUrl}/api/classroom/create`, this.classData)
       .subscribe(
         (response: any) => {
           this.router.navigate(['/teacher/createClassroom']);

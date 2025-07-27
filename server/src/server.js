@@ -21,7 +21,9 @@ mongoose.connect(process.env.MONGODB_URL, {
 .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 app.use(express.json()); // Parse incoming JSON data
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:4200', 'https://studioclassroom.co.in']
+}));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
